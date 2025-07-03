@@ -1,0 +1,64 @@
+# === Build directories ===
+build/
+build*/
+cmake-build-*/
+out/
+bin/
+obj/
+
+# === macOS-specific ===
+.DS_Store
+
+# === Compiled libraries and executables ===
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.lib
+*.exe
+
+# === Temporary files ===
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+
+# === CMake and make ===
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+Testing/
+install_manifest.txt
+
+# === VSCode / CLion / Xcode IDEs ===
+.vscode/
+.idea/
+*.iml
+
+# === LicenseCore specific ===
+release/
+release_*/
+release_obfuscated/
+symbols.map
+liblicense_core.a
+liblicense_core_obf.a
+liblicense_core_obf.map
+test_obfuscated
+licensecore-obfuscated-*.tar.gz
+# Каталоги с обфусцированными или вшитыми релизами
+obfuscated/
+embedded/
+# === Web demo ===
+demo/license_core.wasm
+demo/license_core.js
+demo/license_core.wasm.map
+
+# === Archive artifacts ===
+*.tar.gz
+*.zip
+*.7z

@@ -1,0 +1,35 @@
+# LicenseCore++ Embedded Build
+cmake_minimum_required(VERSION 3.16)
+
+message(STATUS "Building LicenseCore++ Embedded Version")
+
+# Create embedded library target 
+add_library(licensecore_embedded STATIC
+    src/license_core_stub.c
+)
+
+target_include_directories(licensecore_embedded
+    PUBLIC include
+    PRIVATE ${CMAKE_SOURCE_DIR}/include
+)
+
+# C standard for embedded systems
+set_property(TARGET licensecore_embedded PROPERTY C_STANDARD 99)
+
+# Add embedded test executable
+add_executable(test_embedded test/test_embedded.cpp)
+target_link_libraries(test_embedded licensecore_embedded)
+
+# Add test to CTest if tests are enabled
+if(LICENSECORE_BUILD_TESTS)
+    add_test(NAME EmbeddedIntegrationTest COMMAND test_embedded)
+    set_tests_properties(EmbeddedIntegrationTest PROPERTIES
+        LABELS "embedded;integration"
+        TIMEOUT 30
+    )
+endif()
+
+message(STATUS "Embedded version configured")
+message(STATUS "  - Target: licensecore_embedded")
+message(STATUS "  - Test: test_embedded")
+message(STATUS "  - API: C-compatible interface")

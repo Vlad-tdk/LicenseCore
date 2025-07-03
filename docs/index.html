@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LicenseCore++ - Enterprise Software Licensing Solution</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔐%3C/text%3E%3C/svg%3E">
+    <meta name="description"
+        content="Professional software licensing solution with HMAC-SHA256 security, hardware binding, and WebAssembly support. Trusted by enterprise developers worldwide.">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="16" r="1"></circle>
+                    <path d="m7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span class="nav-title">LicenseCore++</span>
+                <span class="nav-badge">Enterprise</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#demo" class="nav-link">Live Demo</a>
+                <a href="#integration" class="nav-link">Integration</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="#contact" class="nav-link nav-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+                        </path>
+                    </svg>
+                    Trusted by 10,000+ developers worldwide
+                </div>
+                <h1 class="hero-title">
+                    Enterprise-Grade <span class="gradient-text">Software Licensing</span>
+                    Pay Once, Own Forever
+                </h1>
+                <p class="hero-subtitle">
+                    Stop paying yearly subscriptions! Get military-grade HMAC-SHA256 encryption, hardware
+                    fingerprinting,
+                    and WebAssembly support with one-time payments. Save $3,000+ vs competitors over 3 years.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="5,3 19,12 5,21"></polygon>
+                        </svg>
+                        Try Live Demo
+                    </a>
+                    <a href="#pricing" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                            </path>
+                            <polyline points="3.27,6.96 12,12.01 20.73,6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                        View Packages
+                    </a>
+                </div>
+
+                <div class="hero-trust">
+                    <div class="trust-item">
+                        <div class="trust-icon">🛡️</div>
+                        <div class="trust-content">
+                            <div class="trust-number">256-bit</div>
+                            <div class="trust-label">HMAC Encryption</div>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">⚡</div>
+                        <div class="trust-content">
+                            <div class="trust-number">&lt; 5ms</div>
+                            <div class="trust-label">Validation Time</div>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">💰</div>
+                        <div class="trust-content">
+                            <div class="trust-number">$3,000+</div>
+                            <div class="trust-label">Saved vs Competitors</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Pricing Comparison -->
+    <section class="competitor-comparison">
+        <div class="container">
+            <h3>💡 Stop Paying Yearly Subscriptions!</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--gray-600);">Compare our one-time pricing vs
+                competitors' yearly subscriptions</p>
+
+            <div class="price-comparison-grid">
+                <div class="competitor-card">
+                    <h4>Cryptolens</h4>
+                    <div class="competitor-price">$1,188/year</div>
+                    <div style="color: var(--gray-600);">$3,564 over 3 years</div>
+                    <div style="margin-top: 1rem; font-size: 0.9rem;">❌ Recurring payments</div>
+                </div>
+
+                <div class="competitor-card">
+                    <h4>LicenseSpring</h4>
+                    <div class="competitor-price">$2,388/year</div>
+                    <div style="color: var(--gray-600);">$7,164 over 3 years</div>
+                    <div style="margin-top: 1rem; font-size: 0.9rem;">❌ Expensive subscriptions</div>
+                </div>
+
+                <div class="our-card">
+                    <h4>🏆 LicenseCore++ Professional</h4>
+                    <div class="our-price">$899 ONCE</div>
+                    <div class="savings">Save $6,265+ over 3 years!</div>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--success);">✅ One-time payment<br>✅
+                        Lifetime ownership<br>✅ No surprises</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Interactive WebAssembly Demo</h2>
+                <p class="section-subtitle">Experience real-time license generation and validation powered by our C++
+                    WebAssembly module</p>
+            </div>
+
+            <div class="demo-container">
+                <div class="input-section">
+                    <h3 class="section-title">📝 License Generator</h3>
+
+                    <div class="form-group">
+                        <label for="userId">Customer ID</label>
+                        <input type="text" id="userId" placeholder="enterprise-customer-001"
+                            value="demo-enterprise-user">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expiryDays">License Duration</label>
+                        <select id="expiryDays">
+                            <option value="7">7 days (Trial)</option>
+                            <option value="30">30 days (Monthly)</option>
+                            <option value="365" selected>1 year (Annual)</option>
+                            <option value="1095">3 years (Enterprise)</option>
+                            <option value="-1">Unlimited (Perpetual)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Features</label>
+                        <div class="feature-selector">
+                            <div class="feature-option selected" data-feature="basic">Basic</div>
+                            <div class="feature-option" data-feature="premium">Premium</div>
+                            <div class="feature-option" data-feature="enterprise">Enterprise</div>
+                            <div class="feature-option" data-feature="api">API Access</div>
+                            <div class="feature-option" data-feature="analytics">Analytics</div>
+                            <div class="feature-option" data-feature="support">Priority Support</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Current Hardware ID</label>
+                        <div class="hwid-display" id="currentHwid">
+                            Generating...
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-secondary" onclick="generateNewHwid()">🔄 New HWID</button>
+                        <button class="btn btn-primary" onclick="generateLicense()">🔐 Generate License</button>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <h3 class="section-title">📄 License Output</h3>
+
+                    <div class="output-box" id="licenseOutput">
+                        Click "Generate License" to create a signed license file...
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-secondary" onclick="copyLicense()" id="copyBtn" disabled>📋 Copy
+                            License</button>
+                        <button class="btn btn-primary" onclick="validateLicense()" id="validateBtn" disabled>✅ Validate
+                            License</button>
+                    </div>
+
+                    <div class="validation-result" id="validationResult"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="info-section">
+        <div class="container">
+            <h2>🚀 Why Choose LicenseCore++?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Military-Grade Security</h3>
+                    <p>HMAC-SHA256 signatures ensure your licenses can't be tampered with. Enterprise-level
+                        cryptographic protection.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🖥️</div>
+                    <h3>Hardware Binding</h3>
+                    <p>Prevent license sharing with hardware fingerprinting across Windows, macOS, and Linux platforms.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>WebAssembly Ready</h3>
+                    <p>Native C++ performance in browsers. Deploy licensing logic anywhere with full WASM support.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Enterprise Pricing</h3>
+                    <p>Starting at $299 vs $2000+ competitors. Professional licensing without breaking the bank.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>💰 Enterprise Pricing Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Developer</h3>
+                    <div class="price">$299</div>
+                    <ul>
+                        <li>✅ Single developer license</li>
+                        <li>✅ C++ source code access</li>
+                        <li>✅ All platforms support</li>
+                        <li>✅ WebAssembly compilation</li>
+                        <li>✅ 1 year updates</li>
+                        <li>✅ Email support</li>
+                    </ul>
+                    <button class="btn-pricing">Get Developer License</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">$899</div>
+                    <ul>
+                        <li>✅ Up to 5 developers</li>
+                        <li>✅ Commercial redistribution</li>
+                        <li>✅ OEM embedding rights</li>
+                        <li>✅ Advanced obfuscation</li>
+                        <li>✅ Priority support</li>
+                        <li>✅ 2 years updates</li>
+                    </ul>
+                    <button class="btn-pricing">Get Professional License</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$1,999/year</div>
+                    <ul>
+                        <li>✅ Unlimited developers</li>
+                        <li>✅ Unlimited products</li>
+                        <li>✅ Source modifications</li>
+                        <li>✅ 24/7 phone support</li>
+                        <li>✅ Custom integrations</li>
+                        <li>✅ SLA guarantees</li>
+                    </ul>
+                    <button class="btn-pricing">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section id="integration" class="integration-section">
+        <div class="container">
+            <h2>🔧 Quick Integration</h2>
+            <div class="code-example">
+                <h3>C++ Integration Example</h3>
+                <pre><code>#include &lt;license_core/license_manager.hpp&gt;
+
+using namespace license_core;
+
+int main() {
+    // Initialize with your secret key
+    LicenseManager manager("your-secret-key-here");
+
+    // Load and validate license
+    auto info = manager.load_and_validate(license_json);
+
+    if (info.valid && manager.has_feature("premium")) {
+        // License is valid and has premium features
+        std::cout << "Welcome, " << info.user_id << "!" << std::endl;
+        enable_premium_features();
+    } else {
+        show_licensing_dialog();
+    }
+
+    return 0;
+}</code></pre>
+            </div>
+
+            <div class="code-example">
+                <h3>WebAssembly Integration</h3>
+                <pre><code>// Load LicenseCore++ WebAssembly module
+async function initializeLicensing() {
+    const LicenseCoreModule = await import('./license_core.js');
+    const wasmModule = await LicenseCoreModule.default();
+
+    // Create license manager instance
+    const manager = new wasmModule.LicenseCoreWasm('your-secret-key');
+
+    // Validate license using native C++ WASM
+    const result = manager.validateLicense(licenseJson);
+
+    if (result.valid) {
+        console.log("License valid for:", result.user_id);
+        enablePremiumFeatures(result.features);
+    }
+}</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>&copy; 2024 LicenseCore Technologies. Enterprise licensing made simple.</p>
+        <div class="footer-links">
+            <a href="https://github.com/licensecore/licensecore">GitHub</a>
+            <a href="mailto:enterprise@licensecore.tech">Contact</a>
+            <a href="#pricing">Pricing</a>
+            <a href="docs.html">Documentation</a>
+        </div>
+    </div>
+
+    <script src="wasm.js"></script>
+</body>
+
+</html>

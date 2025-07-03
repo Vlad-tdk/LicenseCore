@@ -1,0 +1,12 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# Find required dependencies
+find_dependency(OpenSSL REQUIRED)
+
+# Include our targets
+include("${CMAKE_CURRENT_LIST_DIR}/LicenseCoreTargets.cmake")
+
+# Check if all required components are available
+check_required_components(LicenseCore)

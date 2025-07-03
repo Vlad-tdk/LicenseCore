@@ -1,0 +1,177 @@
+name: LicenseCore++ Cross-Platform Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-matrix:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, ubuntu-22.04, macos-11, macos-12, macos-13, windows-2019, windows-2022]
+        compiler: [gcc, clang, msvc]
+        build_type: [Debug, Release]
+        openssl: [system, homebrew, vcpkg, none]
+        exclude:
+          # Exclude invalid combinations
+          - os: windows-2019
+            compiler: gcc
+          - os: windows-2022
+            compiler: gcc
+          - os: ubuntu-20.04
+            compiler: msvc
+          - os: ubuntu-22.04
+            compiler: msvc
+          - os: macos-11
+            compiler: msvc
+          - os: macos-12
+            compiler: msvc
+          - os: macos-13
+            compiler: msvc
+          - os: ubuntu-20.04
+            openssl: homebrew
+          - os: ubuntu-22.04
+            openssl: homebrew
+          - os: windows-2019
+            openssl: homebrew
+          - os: windows-2022
+            openssl: homebrew
+          - os: macos-11
+            openssl: vcpkg
+          - os: macos-12
+            openssl: vcpkg
+          - os: macos-13
+            openssl: vcpkg
+
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup C++ Environment
+      uses: aminya/setup-cpp@v1
+      with:
+        compiler: ${{ matrix.compiler }}
+        cmake: true
+        ninja: true
+    
+    - name: Install OpenSSL (Ubuntu)
+      if: runner.os == 'Linux' && matrix.openssl == 'system'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev pkg-config
+    
+    - name: Install OpenSSL (macOS Homebrew)
+      if: runner.os == 'macOS' && matrix.openssl == 'homebrew'
+      run: |
+        brew install openssl pkg-config
+        echo "PKG_CONFIG_PATH=/opt/homebrew/lib/pkgconfig" >> $GITHUB_ENV
+    
+    - name: Install OpenSSL (Windows vcpkg)
+      if: runner.os == 'Windows' && matrix.openssl == 'vcpkg'
+      run: |
+        vcpkg install openssl:x64-windows
+        echo "CMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake" >> $env:GITHUB_ENV
+    
+    - name: Test Basic Compilation (No OpenSSL)
+      run: |
+        make diagnostic
+        ./diagnostic
+    
+    - name: Test Simple Version
+      run: |
+        make test_simple
+        ./test_simple
+    
+    - name: Test Full Version (With OpenSSL)
+      if: matrix.openssl != 'none'
+      run: |
+        make test_full
+        ./test_full
+    
+    - name: Run Hardware Fingerprinting Test
+      if: matrix.openssl != 'none'
+      run: |
+        make hwid_tool
+        ./hwid_tool
+    
+    - name: CMake Build Test
+      run: |
+        mkdir build && cd build
+        cmake -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ..
+        cmake --build . --parallel
+        ctest --output-on-failure
+    
+    - name: Integration Test
+      if: matrix.openssl != 'none'
+      run: |
+        cd build
+        ./examples/simple_example
+    
+    - name: Performance Benchmark
+      if: matrix.build_type == 'Release' && matrix.openssl != 'none'
+      run: |
+        cd build
+        ./tests/benchmark_test
+    
+    - name: Memory Leak Test (Linux only)
+      if: runner.os == 'Linux' && matrix.build_type == 'Debug'
+      run: |
+        sudo apt-get install -y valgrind
+        cd build
+        valgrind --leak-check=full --error-exitcode=1 ./examples/simple_example
+
+  test-edge-cases:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev pkg-config
+    
+    - name: Edge Case Tests
+      run: |
+        make test_full
+        ./tests/edge_case_tests
+    
+    - name: Fuzzing Test
+      run: |
+        cd tests
+        python3 fuzz_test.py --iterations 10000
+    
+    - name: Security Test
+      run: |
+        cd tests
+        python3 security_test.py
+
+  test-real-world:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev pkg-config
+    
+    - name: Real Integration Test
+      run: |
+        cd tests/integration
+        ./real_world_test.sh
+    
+    - name: Load Test
+      run: |
+        cd tests/performance
+        ./load_test.sh
+    
+    - name: Network Isolated Test
+      run: |
+        # Test offline functionality
+        sudo iptables -A OUTPUT -j DROP
+        make test_full && ./test_full
+        sudo iptables -F

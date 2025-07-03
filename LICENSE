@@ -1,0 +1,61 @@
+# LicenseCore++ - Commercial License Agreement
+
+**SOFTWARE LICENSE AGREEMENT**
+
+This Software License Agreement ("Agreement") is entered into between LicenseCore Technologies ("Licensor") and the purchaser ("Licensee").
+
+## 1. GRANT OF LICENSE
+
+Subject to the terms of this Agreement, Licensor grants Licensee a non-exclusive, non-transferable license to use LicenseCore++ software library.
+
+## 2. LICENSE TIERS
+
+### Developer License ($199)
+- Single developer use
+- Include in 1 commercial product
+- Source code access
+- 1 year updates
+
+### Team License ($499) 
+- Up to 5 developers
+- Include in 3 commercial products
+- Source code access
+- 1 year updates
+- Priority support
+
+### Enterprise License ($1999)
+- Unlimited developers
+- Unlimited commercial products
+- Source code access
+- 1 year updates
+- Priority support
+- Custom modifications
+
+## 3. RESTRICTIONS
+
+Licensee may not:
+- Redistribute the library as a standalone product
+- Reverse engineer (beyond what's in source)
+- Use in open source projects (contact for OSS licensing)
+- Sublicense or transfer rights
+
+## 4. SUPPORT
+
+- Email support included for Team/Enterprise
+- Updates included for 1 year
+- Extended support available
+
+## 5. WARRANTY DISCLAIMER
+
+SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+
+## 6. LIMITATION OF LIABILITY
+
+LICENSOR'S LIABILITY SHALL NOT EXCEED THE LICENSE FEE PAID.
+
+---
+
+**Contact:** license@licensecore.tech
+**Website:** https://licensecore.tech
+
+*This is a sample license. Consult legal counsel for production use.*
