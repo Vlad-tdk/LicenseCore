@@ -54,6 +54,7 @@ jobs:
 
   obfuscated-smoke:
     name: Obfuscated Smoke (${{ matrix.platform }})
+    if: ${{ hashFiles('obfuscated/src/license_core_pure_c.c') != '' }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
