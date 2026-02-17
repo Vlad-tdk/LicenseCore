@@ -46,7 +46,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cd obfuscated
+          OBFUSCATED_DIR="${GITHUB_WORKSPACE}/obfuscated"
+          if [ ! -d "$OBFUSCATED_DIR" ]; then
+            echo "ERROR: obfuscated directory not found at: $OBFUSCATED_DIR"
+            echo "Workspace root contents:"
+            ls -la "${GITHUB_WORKSPACE}"
+            exit 1
+          fi
+          cd "$OBFUSCATED_DIR"
 
           gcc -std=c99 -O2 -DNDEBUG -fvisibility=hidden \
             -DLICENSECORE_OBFUSCATED=1 -DANTI_DEBUG_BUILD \
@@ -58,7 +65,14 @@ jobs:
         shell: msys2 {0}
         run: |
           set -euo pipefail
-          cd obfuscated
+          OBFUSCATED_DIR="${GITHUB_WORKSPACE}/obfuscated"
+          if [ ! -d "$OBFUSCATED_DIR" ]; then
+            echo "ERROR: obfuscated directory not found at: $OBFUSCATED_DIR"
+            echo "Workspace root contents:"
+            ls -la "${GITHUB_WORKSPACE}"
+            exit 1
+          fi
+          cd "$OBFUSCATED_DIR"
 
           gcc -std=c99 -O2 -DNDEBUG -fvisibility=hidden \
             -DLICENSECORE_OBFUSCATED=1 -DANTI_DEBUG_BUILD \
@@ -70,7 +84,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cd obfuscated
+          OBFUSCATED_DIR="${GITHUB_WORKSPACE}/obfuscated"
+          if [ ! -d "$OBFUSCATED_DIR" ]; then
+            echo "ERROR: obfuscated directory not found at: $OBFUSCATED_DIR"
+            echo "Workspace root contents:"
+            ls -la "${GITHUB_WORKSPACE}"
+            exit 1
+          fi
+          cd "$OBFUSCATED_DIR"
 
           clang -arch x86_64 -std=c99 -O2 -DNDEBUG -fvisibility=hidden \
             -DLICENSECORE_OBFUSCATED=1 -DANTI_DEBUG_BUILD \

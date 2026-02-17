@@ -85,7 +85,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cd obfuscated
+          OBFUSCATED_DIR="${GITHUB_WORKSPACE}/obfuscated"
+          if [ ! -d "$OBFUSCATED_DIR" ]; then
+            echo "ERROR: obfuscated directory not found at: $OBFUSCATED_DIR"
+            echo "Workspace root contents:"
+            ls -la "${GITHUB_WORKSPACE}"
+            exit 1
+          fi
+          cd "$OBFUSCATED_DIR"
 
           if [ "${{ matrix.platform }}" = "macos" ]; then
             CC=clang
@@ -113,7 +120,14 @@ jobs:
         shell: msys2 {0}
         run: |
           set -euo pipefail
-          cd obfuscated
+          OBFUSCATED_DIR="${GITHUB_WORKSPACE}/obfuscated"
+          if [ ! -d "$OBFUSCATED_DIR" ]; then
+            echo "ERROR: obfuscated directory not found at: $OBFUSCATED_DIR"
+            echo "Workspace root contents:"
+            ls -la "${GITHUB_WORKSPACE}"
+            exit 1
+          fi
+          cd "$OBFUSCATED_DIR"
 
           gcc -std=c99 -O2 -DNDEBUG -DLICENSECORE_OBFUSCATED=1 -DANTI_DEBUG_BUILD \
             -Iinclude -Isrc -c src/license_core_pure_c.c -o src/license_core_pure_c_ci.o
