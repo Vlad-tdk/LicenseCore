@@ -53,10 +53,5 @@ int main() {
 cmake --install build/release
 ```
 
-## CI/CD
-- CI checks: `.github/workflows/ci.yml`
-- Tagged release pipeline: `.github/workflows/release.yml` (trigger: `v*` tags)
-- Release steps: `RELEASE_CHECKLIST.md`
-
 ## License
 See `LICENSE`.
