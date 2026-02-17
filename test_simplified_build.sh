@@ -2,7 +2,9 @@
 
 echo "🔨 Testing simplified LicenseCore++ Obfuscated build for macOS..."
 
-cd /Users/vlad/Coding/C++/LicenseCore/obfuscated
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
+cd "$REPO_ROOT/obfuscated"
 
 echo "📦 Trying simplified build without problematic flags..."
 

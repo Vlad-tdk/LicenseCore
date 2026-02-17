@@ -3,7 +3,9 @@
 echo "🔨 Testing LicenseCore++ Obfuscated build..."
 
 # Go to obfuscated directory
-cd /Users/vlad/Coding/C++/LicenseCore/obfuscated
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
+cd "$REPO_ROOT/obfuscated"
 
 # Try simple build
 echo "📦 Attempting simple build..."

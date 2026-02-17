@@ -1,145 +1,62 @@
-# LicenseCore++
+# LicenseCore
 
-Modern C++ library for software licensing with HMAC signatures and hardware fingerprinting.
+LicenseCore is a C++17 library for offline license validation with:
+- HMAC-SHA256 signature checks
+- hardware fingerprint binding
+- cross-platform support (Windows, macOS, Linux)
 
-## Features
+## Requirements
+- CMake 3.16+
+- OpenSSL
+- C++17 compiler
 
-- 🔐 **HMAC-SHA256** license signatures
-- 🖥️ **Hardware fingerprinting** (CPU ID, MAC, Volume Serial)
-- ⚡ **Fast validation** with minimal dependencies
-- 🔧 **Easy integration** - just link static library
-- 🚀 **Cross-platform** (Windows, macOS, Linux)
-- 📦 **Extensible** - ready for RSA, server validation, CRL
-
-## Quick Start
-
-### Build
+## Production Build
 
 ```bash
-mkdir build && cd build
-cmake ..
-make -j4
+cmake -S . -B build/release \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DLICENSECORE_BUILD_EXAMPLES=OFF \
+  -DLICENSECORE_BUILD_TESTS=OFF \
+  -DLICENSECORE_BUILD_GTESTS=OFF
+
+cmake --build build/release -j
 ```
 
-### Usage
+## Development Build
+
+```bash
+cmake -S . -B build/dev \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DLICENSECORE_BUILD_EXAMPLES=ON \
+  -DLICENSECORE_BUILD_TESTS=ON \
+  -DLICENSECORE_BUILD_GTESTS=ON
+
+cmake --build build/dev -j
+ctest --test-dir build/dev --output-on-failure
+```
+
+## Quick API Example
 
 ```cpp
 #include <license_core/license_manager.hpp>
-
-using namespace license_core;
 
 int main() {
-    // Initialize with secret key
-    LicenseManager manager("your-secret-key-here");
-    
-    // Validate license
+    license_core::LicenseManager manager("your-strong-secret-key");
     auto info = manager.load_and_validate(license_json);
-    
-    if (info.valid && manager.has_feature("premium")) {
-        // License is valid and has premium feature
-        std::cout << "Welcome, " << info.user_id << "!" << std::endl;
-    }
-    
-    return 0;
+    return info.valid ? 0 : 1;
 }
 ```
 
-### License Format
-
-```json
-{
-  "user_id": "user-123",
-  "license_id": "lic-456",
-  "expiry": "2025-12-31T23:59:59Z",
-  "issued_at": "2024-01-01T00:00:00Z",
-  "hardware_hash": "a1b2c3d4e5f6...",
-  "features": ["basic", "premium", "api"],
-  "version": 1,
-  "hmac_signature": "c4ef45e6..."
-}
-```
-
-## API Reference
-
-### LicenseManager
-
-Main class for license validation:
-
-- `LicenseInfo load_and_validate(const std::string& license_json)` - Validate license
-- `bool has_feature(const std::string& feature)` - Check if feature is available
-- `std::string get_current_hwid()` - Get current hardware ID
-- `std::string generate_license(const LicenseInfo& info)` - Generate signed license
-
-### HardwareFingerprint
-
-Hardware identification:
-
-- `std::string get_fingerprint()` - Get combined hardware hash
-- `std::string get_cpu_id()` - Get CPU identifier
-- `std::string get_mac_address()` - Get primary MAC address
-
-### HMACValidator
-
-Signature operations:
-
-- `std::string sign(const std::string& data)` - Sign data with HMAC
-- `bool verify(const std::string& data, const std::string& signature)` - Verify signature
-
-## Building
-
-### Dependencies
-
-- **CMake** 3.16+
-- **OpenSSL** (for HMAC-SHA256)
-- **C++17** compatible compiler
-
-### Platforms
-
-| Platform | Status | Notes |
-|----------|--------|-------|
-| Windows  | ✅     | MSVC 2019+, MinGW |
-| macOS    | ✅     | Xcode 12+ |
-| Linux    | ✅     | GCC 9+, Clang 10+ |
-
-### Options
+## Install
 
 ```bash
-cmake -DLICENSECORE_BUILD_SHARED=ON    # Build shared library
-cmake -DLICENSECORE_BUILD_EXAMPLES=OFF # Skip examples
-cmake -DLICENSECORE_BUILD_TESTS=OFF    # Skip tests
+cmake --install build/release
 ```
 
-## Integration
-
-### CMake
-
-```cmake
-find_package(LicenseCore REQUIRED)
-target_link_libraries(your_app LicenseCore::licensecore)
-```
-
-### Manual
-
-```cpp
-// Include headers
-#include <license_core/license_manager.hpp>
-
-// Link libraries
-// -llicensecore -lssl -lcrypto
-```
+## CI/CD
+- CI checks: `.github/workflows/ci.yml`
+- Tagged release pipeline: `.github/workflows/release.yml` (trigger: `v*` tags)
+- Release steps: `RELEASE_CHECKLIST.md`
 
 ## License
-
-Commercial license. Contact for pricing and terms.
-
-## Roadmap
-
-- [ ] RSA signature support
-- [ ] Online license validation
-- [ ] Certificate Revocation List (CRL)
-- [ ] Hardware binding levels
-- [ ] License analytics
-
----
-
-**LicenseCore++** - Professional software licensing made simple.
+See `LICENSE`.

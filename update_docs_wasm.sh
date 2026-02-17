@@ -3,7 +3,9 @@
 echo "🔨 ОБНОВЛЕНИЕ WASM ДЛЯ САЙТА DOCS"
 echo "================================"
 
-cd /Users/vlad/Coding/C++/LicenseCore
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
+cd "$REPO_ROOT"
 
 # Check if we have emsdk
 if [ ! -d "$HOME/emsdk" ]; then

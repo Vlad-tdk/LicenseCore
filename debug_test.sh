@@ -1,5 +1,7 @@
 #!/bin/bash
-cd /Users/vlad/Coding/C++/LicenseCore/obfuscated
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
+cd "$REPO_ROOT/obfuscated"
 
 echo "🔧 Сборка DEBUG версии для диагностики..."
 

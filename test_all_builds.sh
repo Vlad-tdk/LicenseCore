@@ -2,8 +2,11 @@
 
 echo "🔨 Testing ALL LicenseCore++ versions build..."
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
+
 echo "📦 1. Testing MAIN version..."
-cd /Users/vlad/Coding/C++/LicenseCore
+cd "$REPO_ROOT"
 make clean && make examples
 
 if [ $? -eq 0 ]; then

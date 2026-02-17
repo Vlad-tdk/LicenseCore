@@ -3,7 +3,10 @@
 echo "🔍 ПРОВЕРКА СПЕЦИАЛИЗИРОВАННЫХ СБОРОК"
 echo "====================================="
 
-cd /Users/vlad/Coding/C++/LicenseCore
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
+
+cd "$REPO_ROOT"
 
 echo ""
 echo "🔧 1. EMBEDDED VERSION"
@@ -45,8 +48,8 @@ echo ""
 echo "📊 3. ИТОГОВЫЙ СТАТУС"
 echo "====================="
 echo "✅ Главная библиотека: Google Test интеграция (56 тестов)"
-echo "$(ls -la ../embedded/test_embedded 2>/dev/null && echo '✅ Embedded версия: интеграционный тест' || echo '⚠️ Embedded версия: требует проверки')"
-echo "$(ls -la obfuscated/test_obfuscated 2>/dev/null && echo '✅ Obfuscated версия: security тест' || echo '⚠️ Obfuscated версия: требует проверки')"
+echo "$(ls -la "$REPO_ROOT/embedded/test_embedded" 2>/dev/null && echo '✅ Embedded версия: интеграционный тест' || echo '⚠️ Embedded версия: требует проверки')"
+echo "$(ls -la "$REPO_ROOT/obfuscated/test_obfuscated" 2>/dev/null && echo '✅ Obfuscated версия: security тест' || echo '⚠️ Obfuscated версия: требует проверки')"
 
 echo ""
 echo "🎯 РЕКОМЕНДАЦИИ:"
@@ -54,7 +57,5 @@ echo "  • Главные тесты: используйте 'make test' в к�
 echo "  • Embedded тесты: 'cd embedded && make test'"  
 echo "  • Obfuscated тесты: 'cd obfuscated && make test'"
 echo "  • Каждая сборка независима и имеет свою цель"
-
-cd ..
 echo ""
 echo "✅ Анализ завершён"

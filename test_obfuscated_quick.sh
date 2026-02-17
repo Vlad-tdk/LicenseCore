@@ -3,7 +3,9 @@
 echo "🔨 БЫСТРАЯ ПРОВЕРКА OBFUSCATED СБОРКИ"
 echo "===================================="
 
-cd /Users/vlad/Coding/C++/LicenseCore/obfuscated
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
+cd "$REPO_ROOT/obfuscated"
 
 # Clean build
 echo "🧹 Очистка предыдущей сборки..."
