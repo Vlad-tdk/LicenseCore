@@ -1,548 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WCZ7W0Q6E8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-WCZ7W0Q6E8');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LicenseCore++ Documentation</title>
+    <title>LicenseCore++ Documentation - Professional Software Licensing</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .doc-container {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        
-        .doc-section {
-            margin-bottom: 3rem;
-        }
-        
-        .doc-section h2 {
-            color: #667eea;
-            border-bottom: 2px solid #e1e5e9;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .api-method {
-            background: #f8fafc;
-            border-left: 4px solid #667eea;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .api-method h4 {
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-        
-        .api-method .signature {
-            font-family: monospace;
-            background: #e1e5e9;
-            padding: 0.5rem;
-            border-radius: 4px;
-            margin: 0.5rem 0;
-        }
-        
-        .nav-links {
-            position: sticky;
-            top: 2rem;
-            background: white;
-            padding: 1rem;
-            border-radius: 10px;
-            border: 2px solid #e1e5e9;
-        }
-        
-        .nav-links ul {
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: #667eea;
-            text-decoration: none;
-            padding: 0.25rem 0;
-            display: block;
-        }
-        
-        .nav-links a:hover {
-            color: #764ba2;
-        }
-        
-        .two-column {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 2rem;
-        }
-        
-        @media (max-width: 768px) {
-            .two-column {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .warning {
-            background: #fff3cd;
-            border: 2px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .tip {
-            background: #d4edda;
-            border: 2px solid #c3e6cb;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📚%3C/text%3E%3C/svg%3E">
+    <meta name="description"
+        content="Complete documentation for LicenseCore++ - HMAC-SHA256 security, hardware fingerprinting, WebAssembly support, and cross-platform licensing.">
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">📚 LicenseCore++ Documentation</div>
-            <div class="tagline">Complete API Reference and Integration Guide</div>
-            <a href="index.html" style="color: white; text-decoration: none; opacity: 0.8;">← Back to Demo</a>
-        </div>
 
-        <div class="two-column">
-            <div class="nav-links">
-                <h3>Contents</h3>
-                <ul>
-                    <li><a href="#quick-start">Quick Start</a></li>
-                    <li><a href="#installation">Installation</a></li>
-                    <li><a href="#license-manager">LicenseManager</a></li>
-                    <li><a href="#hardware-fingerprint">HardwareFingerprint</a></li>
-                    <li><a href="#hmac-validator">HMACValidator</a></li>
-                    <li><a href="#license-format">License Format</a></li>
-                    <li><a href="#integration">Integration Examples</a></li>
-                    <li><a href="#platform-notes">Platform Notes</a></li>
-                    <li><a href="#troubleshooting">Troubleshooting</a></li>
-                </ul>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="16" r="1"></circle>
+                    <path d="m7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span class="nav-title">LicenseCore++</span>
+                <span class="nav-badge">Documentation</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">← Back to Demo</a>
+                <a href="#quick-start" class="nav-link">Quick Start</a>
+                <a href="#api-reference" class="nav-link">API Reference</a>
+                <a href="#examples" class="nav-link">Examples</a>
+                <a href="#commercial" class="nav-link">License</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    Complete API Documentation & Guides
+                </div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">LicenseCore++</span> Documentation
+                </h1>
+                <p class="hero-subtitle">
+                    Comprehensive guides, API reference, and examples for professional software licensing with
+                    HMAC-SHA256 security, hardware fingerprinting, and WebAssembly support.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section id="quick-start" class="info-section">
+        <div class="container">
+            <h2>🚀 Quick Start</h2>
+
+            <div class="code-example">
+                <h3>Commercial Setup</h3>
+                <pre><code># 1. Purchase LicenseCore++ from licensecore.tech
+# 2. Download your licensed package
+# 3. Extract and build
+
+unzip LicenseCore-Professional.zip
+cd LicenseCore
+chmod +x build.sh
+./build.sh
+
+# 4. Test examples
+cd build
+./examples/simple_example
+./examples/hwid_tool
+./examples/license_generator --help</code></pre>
             </div>
 
-            <div class="doc-container">
-                <div class="doc-section" id="quick-start">
-                    <h2>🚀 Quick Start</h2>
-                    <p>Get up and running with LicenseCore++ in under 5 minutes.</p>
-                    
-                    <div class="code-example">
-                        <h3>Basic Usage</h3>
-                        <pre><code>#include &lt;license_core/license_manager.hpp&gt;
-
+            <div class="code-example">
+                <h3>Basic C++ Integration</h3>
+                <pre><code>#include &lt;license_core/license_manager.hpp&gt;
 using namespace license_core;
 
 int main() {
-    // Initialize with your secret key
-    LicenseManager manager("your-secret-key-here");
-    
-    // Validate license
-    auto info = manager.load_and_validate(license_json);
-    
-    if (info.valid && manager.has_feature("premium")) {
-        std::cout << "Welcome, " << info.user_id << "!" << std::endl;
-        // Enable premium features
-    } else {
-        std::cout << "License invalid: " << info.error_message << std::endl;
+    try {
+        // Initialize with secret key
+        LicenseManager manager("your-secret-key-here");
+
+        // Validate license
+        auto info = manager.load_and_validate(license_json);
+
+        if (info.valid && manager.has_feature("premium")) {
+            std::cout << "Welcome, " << info.user_id << "!" << std::endl;
+            // Enable premium features
+        }
+
+    } catch (const LicenseException& e) {
+        std::cerr << "License error: " << e.what() << std::endl;
     }
-    
+
     return 0;
 }</code></pre>
-                    </div>
-                </div>
+            </div>
 
-                <div class="doc-section" id="installation">
-                    <h2>📦 Installation</h2>
-                    
-                    <h3>CMake Integration</h3>
+            <div class="code-example">
+                <h3>CMake Integration</h3>
+                <pre><code>find_package(LicenseCore REQUIRED)
+target_link_libraries(your_app LicenseCore::licensecore)
+
+# Platform-specific dependencies
+if(WIN32)
+    target_link_libraries(your_app iphlpapi ole32 oleaut32)
+elseif(APPLE)
+    target_link_libraries(your_app "-framework IOKit" "-framework CoreFoundation")
+elseif(UNIX)
+    target_link_libraries(your_app pthread)
+endif()</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Reference Section -->
+    <section id="api-reference" class="demo-section">
+        <div class="container">
+            <h2>📚 API Reference</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>LicenseManager</h3>
+                    <p>Core license validation and management with HMAC-SHA256 signatures and hardware binding.</p>
                     <div class="code-example">
-                        <pre><code>find_package(LicenseCore REQUIRED)
-target_link_libraries(your_app LicenseCore::licensecore)</code></pre>
-                    </div>
-                    
-                    <h3>Manual Integration</h3>
-                    <div class="code-example">
-                        <pre><code># Include headers
--I/path/to/licensecore/include
-
-# Link libraries
--llicensecore -lssl -lcrypto
-
-# Platform-specific
-# macOS: -framework IOKit -framework CoreFoundation
-# Windows: -liphlpapi -lwbemuuid -lole32 -loleaut32</code></pre>
-                    </div>
-                    
-                    <h3>Dependencies</h3>
-                    <ul>
-                        <li><strong>OpenSSL</strong> - For HMAC-SHA256 signatures</li>
-                        <li><strong>C++17</strong> - Compatible compiler</li>
-                        <li><strong>CMake 3.16+</strong> - Build system</li>
-                    </ul>
-                </div>
-
-                <div class="doc-section" id="license-manager">
-                    <h2>🔐 LicenseManager API</h2>
-                    <p>Main class for license validation and management.</p>
-                    
-                    <div class="api-method">
-                        <h4>Constructor</h4>
-                        <div class="signature">LicenseManager(const std::string& secret_key)</div>
-                        <p>Initialize license manager with your secret key.</p>
-                    </div>
-                    
-                    <div class="api-method">
-                        <h4>load_and_validate</h4>
-                        <div class="signature">LicenseInfo load_and_validate(const std::string& license_json)</div>
-                        <p>Parse and validate a license JSON string. Returns LicenseInfo with validation results.</p>
-                    </div>
-                    
-                    <div class="api-method">
-                        <h4>has_feature</h4>
-                        <div class="signature">bool has_feature(const std::string& feature) const</div>
-                        <p>Check if current license includes specified feature.</p>
-                    </div>
-                    
-                    <div class="api-method">
-                        <h4>generate_license</h4>
-                        <div class="signature">std::string generate_license(const LicenseInfo& info) const</div>
-                        <p>Generate signed license JSON from license information.</p>
-                    </div>
-                    
-                    <div class="api-method">
-                        <h4>get_current_hwid</h4>
-                        <div class="signature">std::string get_current_hwid() const</div>
-                        <p>Get current system's hardware fingerprint.</p>
-                    </div>
-                    
-                    <div class="api-method">
-                        <h4>is_expired</h4>
-                        <div class="signature">bool is_expired() const</div>
-                        <p>Check if current license has expired.</p>
-                    </div>
-                </div>
-
-                <div class="doc-section" id="license-format">
-                    <h2>📄 License Format</h2>
-                    <p>JSON structure for LicenseCore++ licenses.</p>
-                    
-                    <div class="code-example">
-                        <h3>License JSON Structure</h3>
-                        <pre><code>{
-  "user_id": "customer-123",
-  "license_id": "lic-1640995200",
-  "expiry": "2025-12-31T23:59:59Z",
-  "issued_at": "2024-01-01T00:00:00Z",
-  "hardware_hash": "a1b2c3d4e5f6789...",
-  "features": ["basic", "premium", "api"],
-  "version": 1,
-  "hmac_signature": "c4ef45e6d7f8a9b..."
-}</code></pre>
-                    </div>
-                    
-                    <h3>Field Descriptions</h3>
-                    <ul>
-                        <li><strong>user_id</strong> - Customer identifier</li>
-                        <li><strong>license_id</strong> - Unique license identifier</li>
-                        <li><strong>expiry</strong> - ISO8601 expiration timestamp</li>
-                        <li><strong>issued_at</strong> - ISO8601 issue timestamp</li>
-                        <li><strong>hardware_hash</strong> - Hardware fingerprint</li>
-                        <li><strong>features</strong> - Array of enabled features</li>
-                        <li><strong>version</strong> - License format version</li>
-                        <li><strong>hmac_signature</strong> - HMAC-SHA256 signature</li>
-                    </ul>
-                </div>
-
-                <div class="doc-section" id="integration">
-                    <h2>🔧 Integration Examples</h2>
-                    
-                    <h3>Desktop Application</h3>
-                    <div class="code-example">
-                        <pre><code>class MyApplication {
-private:
-    LicenseManager license_manager_;
-    bool premium_enabled_ = false;
-    
+                        <pre><code>class LicenseManager {
 public:
-    MyApplication() : license_manager_("my-app-secret-key") {}
-    
-    bool initialize() {
-        std::string license_path = get_license_file_path();
-        
-        if (!std::filesystem::exists(license_path)) {
-            show_license_dialog();
-            return false;
-        }
-        
-        std::ifstream file(license_path);
-        std::string license_json((std::istreambuf_iterator&lt;char&gt;(file)),
-                                std::istreambuf_iterator&lt;char&gt;());
-        
-        auto info = license_manager_.load_and_validate(license_json);
-        
-        if (!info.valid) {
-            show_error("License invalid: " + info.error_message);
-            return false;
-        }
-        
-        premium_enabled_ = license_manager_.has_feature("premium");
-        
-        std::cout << "Welcome, " << info.user_id << "!" << std::endl;
-        return true;
-    }
-    
-    void enable_premium_menu() {
-        if (premium_enabled_) {
-            // Show premium menu items
-        }
-    }
-};</code></pre>
-                    </div>
-                    
-                    <h3>License Server</h3>
-                    <div class="code-example">
-                        <pre><code>// Server-side license generation
-std::string generate_customer_license(
-    const std::string& customer_id,
-    const std::string& hardware_id,
-    const std::vector&lt;std::string&gt;& features,
-    int validity_days
-) {
-    LicenseManager manager(get_server_secret_key());
-    
-    LicenseInfo license;
-    license.user_id = customer_id;
-    license.license_id = "lic-" + std::to_string(time(nullptr));
-    license.hardware_hash = hardware_id;
-    license.features = features;
-    license.issued_at = std::chrono::system_clock::now();
-    license.expiry = license.issued_at + 
-                     std::chrono::hours(24 * validity_days);
-    license.version = 1;
-    
-    return manager.generate_license(license);
-}</code></pre>
-                    </div>
-                    
-                    <h3>Feature Gating</h3>
-                    <div class="code-example">
-                        <pre><code>class FeatureManager {
-private:
-    LicenseManager& license_manager_;
-    
-public:
-    bool can_export_pdf() {
-        return license_manager_.has_feature("export") ||
-               license_manager_.has_feature("premium");
-    }
-    
-    bool can_use_api() {
-        return license_manager_.has_feature("api");
-    }
-    
-    int max_users() {
-        if (license_manager_.has_feature("enterprise")) return -1; // unlimited
-        if (license_manager_.has_feature("team")) return 10;
-        return 1; // basic
-    }
+    explicit LicenseManager(const std::string& secret_key);
+
+    // Core functionality
+    LicenseInfo load_and_validate(const std::string& license_json);
+    bool has_feature(const std::string& feature) const;
+    void require_feature(const std::string& feature) const;
+
+    // Utility methods
+    std::string generate_license(const LicenseInfo& info) const;
+    std::string get_current_hwid() const;
+    bool is_expired() const;
+
+    // Configuration
+    void set_hardware_config(const HardwareConfig& config);
+    void set_strict_validation(bool strict = true);
 };</code></pre>
                     </div>
                 </div>
 
-                <div class="doc-section" id="platform-notes">
-                    <h2>🖥️ Platform-Specific Notes</h2>
-                    
-                    <h3>Windows</h3>
-                    <div class="tip">
-                        <strong>Admin Rights:</strong> Some hardware information requires elevated privileges.
-                    </div>
-                    <ul>
-                        <li><strong>CPU ID:</strong> Uses __cpuid intrinsic</li>
-                        <li><strong>MAC Address:</strong> GetAdaptersAddresses API</li>
-                        <li><strong>Volume Serial:</strong> GetVolumeInformation API</li>
-                        <li><strong>Libraries:</strong> iphlpapi.lib, wbemuuid.lib, ole32.lib, oleaut32.lib</li>
-                    </ul>
-                    
-                    <h3>macOS</h3>
-                    <div class="tip">
-                        <strong>OpenSSL Location:</strong> Use Homebrew: /opt/homebrew/lib/libssl.dylib
-                    </div>
-                    <ul>
-                        <li><strong>CPU ID:</strong> sysctlbyname("hw.uuid")</li>
-                        <li><strong>MAC Address:</strong> ifaddrs + sockaddr_dl</li>
-                        <li><strong>Volume Serial:</strong> statfs filesystem ID</li>
-                        <li><strong>Frameworks:</strong> IOKit, CoreFoundation</li>
-                    </ul>
-                    
-                    <h3>Linux</h3>
-                    <div class="warning">
-                        <strong>Virtual Machines:</strong> Hardware fingerprinting may be limited in VMs.
-                    </div>
-                    <ul>
-                        <li><strong>CPU ID:</strong> /proc/cpuinfo or /etc/machine-id</li>
-                        <li><strong>MAC Address:</strong> ifaddrs + AF_PACKET</li>
-                        <li><strong>Volume Serial:</strong> /proc/mounts root filesystem</li>
-                        <li><strong>Packages:</strong> libssl-dev, build-essential</li>
-                    </ul>
-                </div>
-
-                <div class="doc-section" id="troubleshooting">
-                    <h2>🔧 Troubleshooting</h2>
-                    
-                    <h3>Build Issues</h3>
-                    
-                    <div class="api-method">
-                        <h4>OpenSSL Not Found</h4>
-                        <div class="code-example">
-                            <pre><code># macOS
-export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig"
-brew install openssl
-
-# Linux
-sudo apt install pkg-config libssl-dev
-
-# Windows
-vcpkg install openssl:x64-windows</code></pre>
-                        </div>
-                    </div>
-                    
-                    <div class="api-method">
-                        <h4>Compilation Errors</h4>
-                        <p>Ensure C++17 support and proper include paths:</p>
-                        <div class="code-example">
-                            <pre><code>g++ -std=c++17 -I./include your_app.cpp -llicensecore -lssl -lcrypto</code></pre>
-                        </div>
-                    </div>
-                    
-                    <h3>Runtime Issues</h3>
-                    
-                    <div class="api-method">
-                        <h4>Empty Hardware Fingerprint</h4>
-                        <p>Common causes and solutions:</p>
-                        <ul>
-                            <li>Virtual machine limitations - use fallback methods</li>
-                            <li>Insufficient permissions - run with appropriate privileges</li>
-                            <li>Missing platform libraries - check linking</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="api-method">
-                        <h4>License Validation Failures</h4>
-                        <p>Debug validation issues:</p>
-                        <div class="code-example">
-                            <pre><code>auto info = manager.load_and_validate(license_json);
-if (!info.valid) {
-    std::cout << "Error: " << info.error_message << std::endl;
-    
-    // Common issues:
-    // - "Invalid license signature" -> Wrong secret key
-    // - "Hardware fingerprint mismatch" -> Different machine
-    // - "License has expired" -> Past expiry date
-    // - "Missing required fields" -> Malformed JSON
-}</code></pre>
-                        </div>
-                    </div>
-                    
-                    <h3>Performance Optimization</h3>
-                    
-                    <div class="tip">
-                        <strong>Cache Results:</strong> Hardware fingerprinting can be slow - cache the result.
-                    </div>
-                    
+                <div class="feature-card">
+                    <div class="feature-icon">🖥️</div>
+                    <h3>HardwareFingerprint</h3>
+                    <p>Hardware identification with caching, cross-platform support, and configurable components.</p>
                     <div class="code-example">
-                        <pre><code>class CachedLicenseManager {
-private:
-    LicenseManager manager_;
-    std::optional&lt;LicenseInfo&gt; cached_license_;
-    std::string cached_hwid_;
-    
+                        <pre><code>class HardwareFingerprint {
 public:
-    const LicenseInfo& get_license() {
-        if (!cached_license_) {
-            cached_license_ = manager_.load_and_validate(load_license_file());
-        }
-        return *cached_license_;
-    }
-    
-    const std::string& get_hwid() {
-        if (cached_hwid_.empty()) {
-            cached_hwid_ = manager_.get_current_hwid();
-        }
-        return cached_hwid_;
-    }
+    explicit HardwareFingerprint(const HardwareConfig& config = {});
+
+    // Fingerprint generation
+    std::string get_fingerprint() const;       // May throw
+    std::string get_fingerprint_safe() const; // No exceptions
+
+    // Individual components
+    std::string get_cpu_id() const;
+    std::string get_mac_address() const;
+    std::string get_volume_serial() const;
+
+    // Cache management
+    void clear_cache() const;
+    CacheStats get_cache_stats() const;
 };</code></pre>
                     </div>
-                    
-                    <h3>Security Best Practices</h3>
-                    
-                    <div class="warning">
-                        <strong>Secret Key Protection:</strong> Never hardcode secret keys in client applications.
-                    </div>
-                    
-                    <ul>
-                        <li>Use environment variables or encrypted config files</li>
-                        <li>Implement key obfuscation for client-side validation</li>
-                        <li>Consider online validation for high-security applications</li>
-                        <li>Regularly rotate secret keys</li>
-                        <li>Monitor for license abuse patterns</li>
-                    </ul>
-                    
-                    <div class="code-example">
-                        <h3>Secure Key Loading</h3>
-                        <pre><code>std::string load_secret_key() {
-    // Option 1: Environment variable
-    if (const char* key = std::getenv("MYAPP_LICENSE_KEY")) {
-        return std::string(key);
-    }
-    
-    // Option 2: Encrypted config file
-    return decrypt_config_value("license_key");
-    
-    // Option 3: Server-side validation only
-    throw std::runtime_error("Use server-side validation");
-}</code></pre>
-                    </div>
                 </div>
 
-                <div class="doc-section">
-                    <h2>🚀 Ready to Get Started?</h2>
-                    <p>LicenseCore++ makes professional software licensing simple and secure. Start protecting your software today!</p>
-                    
-                    <div style="text-align: center; margin: 2rem 0;">
-                        <a href="index.html" class="btn">Try Interactive Demo</a>
-                    </div>
-                    
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">💼</div>
-                            <h3>Commercial Licenses</h3>
-                            <p>Starting at $199 for individual developers. Enterprise options available.</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">📞</div>
-                            <h3>Support</h3>
-                            <p>Email support included. Priority support for Team and Enterprise plans.</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">🔄</div>
-                            <h3>Updates</h3>
-                            <p>1 year of updates included with all licenses. Extended support available.</p>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>HMACValidator</h3>
+                    <p>Cryptographic signature operations with OpenSSL backend and secure key handling.</p>
+                    <div class="code-example">
+                        <pre><code>class HMACValidator {
+public:
+    explicit HMACValidator(const std::string& secret_key);
+
+    // Signature operations
+    std::string sign(const std::string& data) const;
+    bool verify(const std::string& data, const std::string& signature) const;
+    void verify_or_throw(const std::string& data, const std::string& signature) const;
+
+    // JSON utilities
+    std::string sign_json(const std::string& json_without_signature) const;
+    bool verify_json(const std::string& json_with_signature) const;
+};</code></pre>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="footer">
-            <p>&copy; 2024 LicenseCore Technologies. Professional licensing made simple.</p>
-            <div class="footer-links">
-                <a href="index.html">Demo</a>
-                <a href="mailto:license@licensecore.tech">Contact</a>
-                <a href="https://github.com/licensecore/licensecore">GitHub</a>
+    <!-- Examples Section -->
+    <section id="examples" class="info-section">
+        <div class="container">
+            <h2>💻 Usage Examples</h2>
+
+            <div class="code-example">
+                <h3>Basic License Validation</h3>
+                <pre><code>#include &lt;license_core/license_manager.hpp&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    try {
+        LicenseManager manager("my-secret-key");
+
+        // Load license from file or string
+        std::string license_json = load_license_file("license.json");
+
+        // Validate license
+        auto result = manager.load_and_validate(license_json);
+
+        if (result.valid) {
+            std::cout << "✅ License valid for: " << result.user_id << std::endl;
+
+            // Check specific features
+            if (manager.has_feature("premium")) {
+                std::cout << "🌟 Premium features enabled" << std::endl;
+            }
+
+            if (manager.has_feature("api_access")) {
+                std::cout << "🔌 API access granted" << std::endl;
+            }
+        } else {
+            std::cout << "❌ License validation failed: " << result.error_message << std::endl;
+        }
+
+    } catch (const InvalidSignatureException& e) {
+        std::cout << "🚨 Invalid license signature" << std::endl;
+    } catch (const ExpiredLicenseException& e) {
+        std::cout << "⏰ License has expired" << std::endl;
+    } catch (const HardwareMismatchException& e) {
+        std::cout << "🖥️ Hardware mismatch" << std::endl;
+    } catch (const LicenseException& e) {
+        std::cout << "❌ License error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}</code></pre>
             </div>
+
+            <div class="code-example">
+                <h3>Hardware Configuration</h3>
+                <pre><code>#include &lt;license_core/hardware_fingerprint.hpp&gt;
+
+int main() {
+    // Configure hardware components
+    HardwareConfig config;
+    config.use_cpu_id = true;              // Enable CPU ID
+    config.use_mac_address = true;         // Enable MAC address
+    config.use_volume_serial = true;       // Enable volume serial
+    config.use_motherboard_serial = false; // Disable motherboard (unstable)
+
+    // Caching configuration
+    config.enable_caching = true;
+    config.cache_lifetime = std::chrono::minutes(10);
+    config.thread_safe_cache = true;
+
+    HardwareFingerprint fingerprint(config);
+
+    try {
+        std::string hwid = fingerprint.get_fingerprint();
+        std::cout << "Hardware ID: " << hwid << std::endl;
+
+        // Get individual components
+        std::string cpu_id = fingerprint.get_cpu_id();
+        std::string mac_addr = fingerprint.get_mac_address();
+
+        std::cout << "CPU ID: " << cpu_id << std::endl;
+        std::cout << "MAC Address: " << mac_addr << std::endl;
+
+    } catch (const HardwareDetectionException& e) {
+        std::cout << "Hardware detection failed: " << e.what() << std::endl;
+
+        // Use safe version as fallback
+        std::string safe_hwid = fingerprint.get_fingerprint_safe();
+        std::cout << "Fallback Hardware ID: " << safe_hwid << std::endl;
+    }
+
+    return 0;
+}</code></pre>
+            </div>
+
+            <div class="code-example">
+                <h3>License Generation (Server-side)</h3>
+                <pre><code>#include &lt;license_core/license_manager.hpp&gt;
+#include &lt;chrono&gt;
+
+std::string generate_customer_license(const std::string& customer_id,
+                                     const std::string& customer_hwid,
+                                     const std::vector&lt;std::string&gt;& features,
+                                     int validity_days) {
+    LicenseManager manager("server-secret-key");
+
+    // Create license info
+    LicenseInfo license;
+    license.user_id = customer_id;
+    license.license_id = "lic-" + std::to_string(std::time(nullptr));
+    license.hardware_hash = customer_hwid;
+    license.features = features;
+
+    // Set timestamps
+    auto now = std::chrono::system_clock::now();
+    license.issued_at = now;
+    license.expiry = now + std::chrono::hours(24 * validity_days);
+    license.version = 1;
+
+    // Generate signed license
+    return manager.generate_license(license);
+}
+
+int main() {
+    // Example: Generate enterprise license
+    std::vector&lt;std::string&gt; enterprise_features = {
+        "basic", "premium", "enterprise", "api_access", "priority_support"
+    };
+
+    std::string license = generate_customer_license(
+        "enterprise-customer-001",
+        "a1b2c3d4e5f6...",  // Customer's hardware ID
+        enterprise_features,
+        365  // 1 year validity
+    );
+
+    std::cout << "Generated license:" << std::endl;
+    std::cout << license << std::endl;
+
+    return 0;
+}</code></pre>
+            </div>
+
+            <div class="code-example">
+                <h3>WebAssembly Integration</h3>
+                <pre><code>// JavaScript/TypeScript integration
+import LicenseCoreModule from './license_core.js';
+
+async function initializeLicensing() {
+    // Load WASM module
+    const wasmModule = await LicenseCoreModule();
+    const manager = new wasmModule.LicenseCoreWasm('secret-key');
+
+    // Get hardware ID (browser simulation)
+    const hwid = manager.getCurrentHwid();
+    console.log('Browser Hardware ID:', hwid);
+
+    // Generate license with WASM
+    const features = new wasmModule.VectorString();
+    features.push_back('premium');
+    features.push_back('api');
+
+    const license = manager.generateLicense('user-123', features, 365);
+    console.log('Generated license:', license);
+
+    // Validate license
+    const result = manager.validateLicense(license);
+    console.log('Valid:', result.valid);
+    console.log('User:', result.user_id);
+    console.log('Features:', result.features);
+
+    // Clean up
+    features.delete();
+}
+
+// Initialize when page loads
+initializeLicensing().catch(console.error);</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commercial License Section -->
+    <section id="commercial" class="pricing-section">
+        <div class="container">
+            <h2>💼 Commercial License Required</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: var(--gray-600);">
+                LicenseCore++ is commercial software. All usage requires a valid license.
+            </p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Developer</h3>
+                    <div class="price">$199</div>
+                    <ul>
+                        <li>✅ Single developer license</li>
+                        <li>✅ All platforms support</li>
+                        <li>✅ WebAssembly compilation</li>
+                        <li>✅ 1 year updates</li>
+                        <li>✅ Source code</li>
+                        <li>✅ Commercial deployment</li>
+                    </ul>
+                    <a href="https://licensecore.tech/purchase?plan=developer" class="btn-pricing">Purchase
+                        Developer</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">$899</div>
+                    <ul>
+                        <li>✅ Up to 5 developers</li>
+                        <li>✅ Commercial redistribution</li>
+                        <li>✅ WebAssembly compilation</li>
+                        <li>✅ OEM embedding rights</li>
+                        <li>✅ Advanced obfuscation</li>
+                        <li>✅ Priority support</li>
+                        <li>✅ 1 year updates</li>
+                        <li>✅ Source access</li>
+                    </ul>
+                    <a href="https://licensecore.tech/purchase?plan=professional" class="btn-pricing">Purchase
+                        Professional</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$1,999/year</div>
+                    <ul>
+                        <li>✅ Unlimited developers</li>
+                        <li>✅ WebAssembly compilation</li>
+                        <li>✅ Custom branding</li>
+                        <li>✅ Unlimited products</li>
+                        <li>✅ OEM embedding rights</li>
+                        <li>✅ Source modifications</li>
+                        <li>✅ Priority support</li>
+                        <li>✅ Custom integrations</li>
+                    </ul>
+                    <a href="mailto:sales@licensecore.tech?subject=Enterprise License Inquiry"
+                        class="btn-pricing">Contact Sales</a>
+                </div>
+            </div>
+
+            <div
+                style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--gray-50); border-radius: 1rem;">
+                <h3>🚫 No Open Source License</h3>
+                <p style="color: var(--gray-600); margin: 1rem 0;">
+                    This is proprietary commercial software. All components require a valid license for any use,
+                    including evaluation, development, and production deployment.
+                </p>
+                <p style="font-weight: 600;">
+                    📞 Questions? Contact <a href="mailto:sales@licensecore.tech">sales@licensecore.tech</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Links -->
+    <section class="info-section">
+        <div class="container">
+            <h2>📚 Additional Documentation</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>Core Guides</h3>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li><a href="#quick-start">Quick Start</a></li>
+                        <li><a href="#api-reference">API Reference</a></li>
+                        <li><a href="#examples">Usage Examples</a></li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Advanced Features</h3>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li><a href="#examples">WebAssembly Integration</a></li>
+                        <li><a href="#examples">Performance Optimization</a></li>
+                        <li><a href="#api-reference">Exception Management</a></li>
+                        <li><a href="#api-reference">Security Hardening</a></li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>Specialized Editions</h3>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li><a href="index.html#features">Embedded/IoT Edition</a></li>
+                        <li><a href="#examples">Examples</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 LicenseCore Technologies. Professional licensing made simple.</p>
+        <div class="footer-links">
+            <a href="https://licensecore.tech">Website</a>
+            <a href="mailto:support@licensecore.tech">Support</a>
+            <a href="mailto:sales@licensecore.tech">Sales</a>
+            <a href="index.html">Demo</a>
         </div>
     </div>
 </body>
+
 </html>

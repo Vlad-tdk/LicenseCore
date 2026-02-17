@@ -1,109 +1,38 @@
-# LicenseCore++ Quick Start
+# Quick Start
 
-## 🚀 Build & Test (5 minutes)
+## 1. Build library
 
 ```bash
-# Clone/download the project
-cd LicenseCore
+cmake -S . -B build/release \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DLICENSECORE_BUILD_EXAMPLES=OFF \
+  -DLICENSECORE_BUILD_TESTS=OFF \
+  -DLICENSECORE_BUILD_GTESTS=OFF
 
-# Build everything
-chmod +x build.sh
-./build.sh
-
-# Test the examples
-cd build
-./examples/simple_example
-./examples/hwid_tool
-./examples/license_generator --help
+cmake --build build/release -j
 ```
 
-## 📦 Integration
-
-### CMake Project
-```cmake
-find_package(LicenseCore REQUIRED)
-target_link_libraries(your_app LicenseCore::licensecore)
-```
-
-### Manual Integration
-```cpp
-#include <license_core/license_manager.hpp>
-// Link: -llicensecore -lssl -lcrypto
-```
-
-## 💡 Basic Usage
+## 2. Use in your app
 
 ```cpp
 #include <license_core/license_manager.hpp>
 
-// 1. Initialize
-LicenseManager manager("your-secret-key");
-
-// 2. Generate license (server-side)
-LicenseInfo info;
-info.user_id = "customer-123";
-info.hardware_hash = manager.get_current_hwid();
-info.features = {"basic", "premium"};
-info.expiry = now + 365_days;
-std::string license = manager.generate_license(info);
-
-// 3. Validate license (client-side)
-auto result = manager.load_and_validate(license);
-if (result.valid && manager.has_feature("premium")) {
-    // License OK, premium features available
+int main() {
+    license_core::LicenseManager manager("your-strong-secret-key");
+    auto result = manager.load_and_validate(license_json);
+    return result.valid ? 0 : 1;
 }
 ```
 
-## 🔧 Dependencies
+## 3. Enable examples/tests (optional)
 
-- **OpenSSL** (for HMAC-SHA256)
-- **C++17** compiler
-- **CMake 3.16+**
-
-### Install Dependencies
-
-**macOS:**
 ```bash
-brew install openssl cmake
+cmake -S . -B build/dev \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DLICENSECORE_BUILD_EXAMPLES=ON \
+  -DLICENSECORE_BUILD_TESTS=ON \
+  -DLICENSECORE_BUILD_GTESTS=ON
+
+cmake --build build/dev -j
+ctest --test-dir build/dev --output-on-failure
 ```
-
-**Ubuntu/Debian:**
-```bash
-sudo apt install libssl-dev cmake build-essential
-```
-
-**Windows:**
-```bash
-vcpkg install openssl
-```
-
-## 📋 Next Steps
-
-1. **Customize hardware fingerprinting** - see `HardwareConfig`
-2. **Integrate into your app** - see `examples/simple_example.cpp`
-3. **Deploy license server** - use `license_generator` tool
-4. **Add obfuscation** - protect your secret key
-5. **Consider DRM upgrade** - RSA signatures, online validation
-
-## 🆘 Common Issues
-
-**Build fails with OpenSSL not found:**
-```bash
-# macOS
-export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig"
-
-# Linux
-sudo apt install pkg-config
-
-# Windows
-set OpenSSL_ROOT_DIR=C:\vcpkg\installed\x64-windows
-```
-
-**Hardware fingerprint empty:**
-- Check platform-specific permissions
-- Some components require admin rights
-- Virtual machines may have limited HW info
-
----
-
-**Ready to ship? Get your commercial license at licensecore.tech**

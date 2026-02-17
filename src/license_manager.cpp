@@ -6,20 +6,49 @@
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
+#include <ctime>
+#include <stdexcept>
 
 namespace license_core {
+
+namespace {
+
+std::time_t to_utc_time_t(std::tm* utc_tm) {
+#ifdef _WIN32
+    return _mkgmtime(utc_tm);
+#else
+    return timegm(utc_tm);
+#endif
+}
+
+std::tm gmtime_safe(std::time_t time_value) {
+    std::tm tm{};
+#ifdef _WIN32
+    if (gmtime_s(&tm, &time_value) != 0) {
+        throw std::runtime_error("Failed to convert time");
+    }
+#else
+    if (gmtime_r(&time_value, &tm) == nullptr) {
+        throw std::runtime_error("Failed to convert time");
+    }
+#endif
+    return tm;
+}
+
+} // namespace
 
 // PIMPL implementation
 class LicenseManager::Impl {
 public:
     explicit Impl(const std::string& secret_key) 
-        : hmac_validator_(secret_key), 
+        : hardware_config_(),
+          hmac_validator_(secret_key), 
           hardware_fingerprint_(std::make_unique<HardwareFingerprint>(hardware_config_)) {
     }
     
+    HardwareConfig hardware_config_;
     HMACValidator hmac_validator_;
     std::unique_ptr<HardwareFingerprint> hardware_fingerprint_;
-    HardwareConfig hardware_config_;
     LicenseInfo current_license_;
     bool strict_validation_ = false;
 };
@@ -253,42 +282,48 @@ std::chrono::system_clock::time_point LicenseManager::parse_iso8601(const std::s
     if (date_str.empty()) {
         throw std::invalid_argument("Date string cannot be empty");
     }
-    
-    std::tm tm = {};
-    std::istringstream ss(date_str);
-    
-    // Try full ISO8601 format first
-    ss >> std::get_time(&tm, "%Y-%m-%dT%H:%M:%S");
-    
-    if (ss.fail()) {
-        // Try date-only format
-        ss.clear();
-        ss.str(date_str);
-        ss >> std::get_time(&tm, "%Y-%m-%d");
-        
+
+    auto parse_with_format = [&date_str](const char* format, bool allow_z, std::tm& out_tm) -> bool {
+        out_tm = {};
+        std::istringstream ss(date_str);
+        ss >> std::get_time(&out_tm, format);
         if (ss.fail()) {
+            return false;
+        }
+
+        ss >> std::ws;
+        if (allow_z && ss.peek() == 'Z') {
+            ss.get();
+            ss >> std::ws;
+        }
+
+        if (!ss.eof()) {
             throw std::invalid_argument("Invalid date format: " + date_str);
         }
+
+        return true;
+    };
+
+    std::tm tm{};
+    if (!parse_with_format("%Y-%m-%dT%H:%M:%S", true, tm) &&
+        !parse_with_format("%Y-%m-%d", false, tm)) {
+        throw std::invalid_argument("Invalid date format: " + date_str);
     }
-    
-    auto time_t = std::mktime(&tm);
-    if (time_t == -1) {
+
+    const auto time_t = to_utc_time_t(&tm);
+    if (time_t == static_cast<std::time_t>(-1)) {
         throw std::invalid_argument("Invalid date: " + date_str);
     }
-    
+
     return std::chrono::system_clock::from_time_t(time_t);
 }
 
 std::string LicenseManager::format_iso8601(const std::chrono::system_clock::time_point& time_point) {
     auto time_t = std::chrono::system_clock::to_time_t(time_point);
-    std::tm* tm = std::gmtime(&time_t);
-    
-    if (!tm) {
-        throw std::runtime_error("Failed to convert time");
-    }
-    
+    const std::tm tm = gmtime_safe(time_t);
+
     std::ostringstream ss;
-    ss << std::put_time(tm, "%Y-%m-%dT%H:%M:%SZ");
+    ss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%SZ");
     return ss.str();
 }
 

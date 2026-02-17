@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+
+    <!-- HTTPS Enforcement for Web Crypto API -->
+    <script>
+        // Force HTTPS for Web Crypto API compatibility
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+            location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+        }
+    </script>
+
+    <title>LicenseCore++ Architecture: HMAC-SHA256 Software Licensing Implementation | WebAssembly Security Guide</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔐%3C/text%3E%3C/svg%3E">
+    <meta name="description"
+        content="Complete guide to LicenseCore++ architecture: HMAC-SHA256 implementation, hardware fingerprinting, WebAssembly compilation, and enterprise software protection. Learn how cryptographic licensing works across platforms.">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="HMAC-SHA256 licensing, software architecture, WebAssembly security, hardware fingerprinting, C++ licensing library, cryptographic protection, software piracy prevention, enterprise licensing solution, cross-platform security">
+    <meta name="author" content="LicenseCore Technologies">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <link rel="canonical" href="https://www.licensecore.tech/architecture-en.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="LicenseCore++ Architecture: HMAC-SHA256 Software Licensing Implementation">
+    <meta property="og:description" content="Complete technical guide to enterprise software protection with HMAC-SHA256, WebAssembly, and hardware fingerprinting.">
+    <meta property="og:url" content="https://www.licensecore.tech/architecture-en.html">
+    <meta property="og:type" content="article">
+    
+    <style>
+        /* Additional styles for article page */
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 120px;
+            margin-bottom: 3rem;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            color: var(--gray-900);
+        }
+        
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 3rem 0 1.5rem 0;
+            border-bottom: 2px solid var(--gray-200);
+            padding-bottom: 0.5rem;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin: 2rem 0 1rem 0;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .article-content ul {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .code-block {
+            background: var(--gray-900);
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .highlight-box h4 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 120px;
+            left: 2rem;
+            z-index: 100;
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 100px 1rem 2rem 1rem;
+                padding: 1.5rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .back-button {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 2rem;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="24" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="16" r="1"></circle>
+                    <path d="m7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span class="nav-title">LicenseCore++</span>
+                <span class="nav-badge">Architecture</span>
+            </div>
+            <div class="nav-menu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/#features" class="nav-link">Features</a>
+                <a href="/#demo" class="nav-link">Demo</a>
+                <a href="/#pricing" class="nav-link">Pricing</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs for SEO -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/" itemprop="item">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="docs.html" itemprop="item">
+                        <span itemprop="name">Documentation</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span itemprop="name">Architecture Guide</span>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <a href="/" class="back-button">← Back to Home</a>
+
+    <div class="article-container">
+        <div class="article-header">
+            <h1 class="article-title">LicenseCore++ Architecture: Enterprise HMAC-SHA256 Software Licensing Implementation</h1>
+            <p class="article-subtitle">Complete technical guide to building secure software protection with WebAssembly, hardware fingerprinting, and cryptographic validation</p>
+        </div>
+
+        <div class="article-content">
+            <h2>🚀 Technical Architecture Deep Dive</h2>
+
+            <h3>Core Components Overview</h3>
+            
+            <p>LicenseCore++ is built on a modular architecture that separates concerns between license generation, validation, and integration. This separation ensures security while maintaining flexibility across different deployment scenarios.</p>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔐</div>
+                    <h4>HMAC-SHA256 Cryptographic Core</h4>
+                    <p>Military-grade message authentication using SHA-256 hashing with secret keys. Provides tamper-proof signatures without requiring asymmetric cryptography.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h4>WebAssembly Cross-Platform Engine</h4>
+                    <p>Single C++ codebase compiled to native binaries and WebAssembly modules. Enables identical validation logic across desktop, mobile, and web platforms.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🖥️</div>
+                    <h4>Hardware Fingerprinting System</h4>
+                    <p>Multi-factor device identification combining CPU signatures, MAC addresses, and storage identifiers. Prevents license sharing while handling hardware changes gracefully.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚙️</div>
+                    <h4>Flexible Integration API</h4>
+                    <p>Clean C++17 interface with comprehensive error handling. Supports embedded systems, desktop applications, and web-based licensing workflows.</p>
+                </div>
+            </div>
+
+            <h2>🔧 License Generation Process</h2>
+
+            <h3>HMAC-SHA256 Implementation</h3>
+
+            <p>The license generation process combines user data, hardware fingerprints, and expiration dates into a cryptographically signed package:</p>
+
+            <div class="code-block">
+// Generate hardware fingerprint
+std::string hwid = hardware_fingerprint.get_fingerprint();
+// Combines: CPU ID + MAC address + disk serial
+
+// Create data for signing
+std::string license_data = user_id + expiry + features + hwid;
+
+// Sign with HMAC-SHA256
+std::string signature = hmac_validator.sign(license_data);
+            </div>
+
+            <h3>Server-Side License Creation</h3>
+
+            <div class="code-block">
+# License generation via CLI
+./license_gen --user "enterprise-001" --expire "2025-12-31" 
+  --hwid "a1b2c3d4..." --features "premium,api"
+
+# Result: signed JSON
+{
+  "user_id": "enterprise-001",
+  "hardware_hash": "a1b2c3d4e5f6...",
+  "expiry": "2025-12-31T23:59:59Z",
+  "features": ["premium", "api"],
+  "hmac_signature": "c4ef45e6a7b8..."
+}
+            </div>
+
+            <h2>🌐 Client-Side Validation</h2>
+
+            <h3>C++ Native Implementation</h3>
+
+            <div class="code-block">
+#include &lt;license_core/license_manager.hpp&gt;
+
+using namespace license_core;
+
+int main() {
+    try {
+        LicenseManager manager("your-secret-key");
+        
+        auto info = manager.load_and_validate(license_json);
+        
+        if (info.valid && manager.has_feature("premium")) {
+            std::cout &lt;&lt; "Premium features enabled!" &lt;&lt; std::endl;
+            enable_premium_mode();
+        }
+    } catch (const LicenseException& e) {
+        std::cerr &lt;&lt; "License error: " &lt;&lt; e.what() &lt;&lt; std::endl;
+    }
+}
+            </div>
+
+            <h3>WebAssembly Browser Integration</h3>
+
+            <div class="code-block">
+// Initialize WASM module
+const licenseCore = await loadLicenseCore();
+const manager = new licenseCore.LicenseManager("secret-key");
+
+// License validation
+try {
+    const licenseInfo = manager.loadAndValidate(licenseJson);
+    if (licenseInfo.valid && manager.hasFeature("premium")) {
+        enablePremiumFeatures();
+    }
+} catch (error) {
+    showLicenseError(error.message);
+}
+            </div>
+
+            <h2>🛡️ Security Considerations</h2>
+
+            <h3>Why HMAC-SHA256 Over RSA?</h3>
+
+            <ul>
+                <li><strong>Compact signatures:</strong> Only 64 hex characters vs 256+ bytes for RSA</li>
+                <li><strong>Fast validation:</strong> &lt; 1ms vs 5-50ms for RSA verification</li>
+                <li><strong>WebAssembly optimized:</strong> Native browser support without large crypto libraries</li>
+                <li><strong>Quantum resistant:</strong> SHA-256 provides post-quantum security</li>
+                <li><strong>Secret key isolation:</strong> Key never leaves the generation server</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>🔍 Security Analysis</h4>
+                <p>The security of HMAC-SHA256 licensing depends on:</p>
+                <ul>
+                    <li><strong>Secret key confidentiality:</strong> Key never leaves the generation server</li>
+                    <li><strong>SHA-256 collision resistance:</strong> Computationally infeasible to forge signatures</li>
+                    <li><strong>Implementation quality:</strong> Constant-time comparison prevents timing attacks</li>
+                    <li><strong>Key rotation:</strong> Periodic key changes limit exposure window</li>
+                </ul>
+                <p><em>Result: Cryptographically strong protection that scales efficiently across all platforms.</em></p>
+            </div>
+
+            <h2>⚡ Performance Optimization</h2>
+
+            <h3>WebAssembly Compilation</h3>
+
+            <p>The same C++ validation code compiles to both native binaries and WebAssembly modules, ensuring consistent behavior and performance across platforms:</p>
+
+            <ul>
+                <li><strong>Native performance:</strong> Direct CPU execution for desktop applications</li>
+                <li><strong>Browser compatibility:</strong> Near-native speed in web environments</li>
+                <li><strong>Memory efficiency:</strong> &lt; 1MB footprint for the complete validation engine</li>
+                <li><strong>Thread safety:</strong> Concurrent validation without synchronization overhead</li>
+            </ul>
+
+            <h3>Hardware Fingerprinting Strategies</h3>
+
+            <p>Our multi-factor approach balances security with usability:</p>
+
+            <ul>
+                <li><strong>CPU identification:</strong> Processor signatures and feature sets</li>
+                <li><strong>Network interfaces:</strong> MAC addresses with privacy considerations</li>
+                <li><strong>Storage devices:</strong> Disk serial numbers and partition UUIDs</li>
+                <li><strong>System metrics:</strong> OS installation timestamps and machine IDs</li>
+            </ul>
+
+            <h2>📦 Enterprise Deployment</h2>
+
+            <h3>Integration Patterns</h3>
+
+            <p>LicenseCore++ supports multiple deployment scenarios:</p>
+
+            <ul>
+                <li><strong>Desktop applications:</strong> Static linking with native validation</li>
+                <li><strong>Web applications:</strong> WebAssembly modules for client-side licensing</li>
+                <li><strong>Mobile apps:</strong> Cross-compiled libraries for iOS and Android</li>
+                <li><strong>Embedded systems:</strong> Lightweight C API for resource-constrained devices</li>
+                <li><strong>Server-side validation:</strong> API endpoints for distributed licensing</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>🎯 Ready to Implement Enterprise Licensing?</h4>
+                <p>LicenseCore++ provides the security, performance, and flexibility needed for modern software protection. Whether you're building desktop applications, web services, or embedded systems, our unified approach ensures consistent licensing across all platforms.</p>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="/" class="btn btn-primary" style="display: inline-block; padding: 1rem 2rem; background: var(--gradient); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Get Started with LicenseCore++</a>
+                </div>
+            </div>
+
+            <div style="border-top: 2px solid var(--gray-200); margin-top: 3rem; padding-top: 2rem; text-align: center; color: var(--gray-600);">
+                <p><em>Questions about the architecture? Contact our technical team!</em></p>
+                <p style="margin-top: 1rem;"><strong>Technical Support:</strong> <a href="mailto:support@licensecore.tech">support@licensecore.tech</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="wasm.js"></script>
+</body>
+</html>

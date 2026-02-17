@@ -10,7 +10,7 @@ using namespace license_core;
 bool test_hmac_validator() {
     std::cout << "Testing HMAC Validator..." << std::endl;
     
-    HMACValidator validator("test-secret-key");
+    HMACValidator validator("test-secret-key-001");
     
     // Test basic sign/verify
     std::string data = "test data for signing";
@@ -88,17 +88,23 @@ bool test_license_manager() {
     LicenseInfo expired_license = license_info;
     expired_license.expiry = std::chrono::system_clock::now() - std::chrono::hours(1);
     std::string expired_json = manager.generate_license(expired_license);
-    auto expired_validated = manager.load_and_validate(expired_json);
-    assert(!expired_validated.valid);
-    assert(expired_validated.error_message.find("expired") != std::string::npos);
+    try {
+        (void)manager.load_and_validate(expired_json);
+        assert(false && "Expected ExpiredLicenseException");
+    } catch (const ExpiredLicenseException&) {
+        // expected
+    }
     
     // Test wrong hardware hash
     LicenseInfo wrong_hw_license = license_info;
     wrong_hw_license.hardware_hash = "wrong-hardware-hash";
     std::string wrong_hw_json = manager.generate_license(wrong_hw_license);
-    auto wrong_hw_validated = manager.load_and_validate(wrong_hw_json);
-    assert(!wrong_hw_validated.valid);
-    assert(wrong_hw_validated.error_message.find("mismatch") != std::string::npos);
+    try {
+        (void)manager.load_and_validate(wrong_hw_json);
+        assert(false && "Expected HardwareMismatchException");
+    } catch (const HardwareMismatchException&) {
+        // expected
+    }
     
     std::cout << "✅ License Manager tests passed" << std::endl;
     return true;
@@ -107,7 +113,7 @@ bool test_license_manager() {
 bool test_invalid_signatures() {
     std::cout << "Testing Invalid Signatures..." << std::endl;
     
-    LicenseManager manager("test-secret-key");
+    LicenseManager manager("test-secret-key-001");
     
     // Test tampered license
     std::string tampered_license = R"({
@@ -120,9 +126,12 @@ bool test_invalid_signatures() {
         "hmac_signature": "fake-signature-12345"
     })";
     
-    auto result = manager.load_and_validate(tampered_license);
-    assert(!result.valid);
-    assert(result.error_message.find("signature") != std::string::npos);
+    try {
+        (void)manager.load_and_validate(tampered_license);
+        assert(false && "Expected InvalidSignatureException");
+    } catch (const InvalidSignatureException&) {
+        // expected
+    }
     
     std::cout << "✅ Invalid signature tests passed" << std::endl;
     return true;

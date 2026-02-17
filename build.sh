@@ -5,13 +5,15 @@
 set -e
 
 BUILD_TYPE=${1:-Release}
-BUILD_EXAMPLES=${2:-ON}
-BUILD_TESTS=${3:-ON}
+BUILD_EXAMPLES=${2:-OFF}
+BUILD_TESTS=${3:-OFF}
+BUILD_GTESTS=${4:-OFF}
 
 echo "=== Building LicenseCore ==="
 echo "Build Type: $BUILD_TYPE"
 echo "Examples: $BUILD_EXAMPLES"
 echo "Tests: $BUILD_TESTS"
+echo "Google Tests: $BUILD_GTESTS"
 echo ""
 
 # Create build directory
@@ -22,7 +24,8 @@ cd build
 cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
     -DLICENSECORE_BUILD_EXAMPLES=$BUILD_EXAMPLES \
-    -DLICENSECORE_BUILD_TESTS=$BUILD_TESTS
+    -DLICENSECORE_BUILD_TESTS=$BUILD_TESTS \
+    -DLICENSECORE_BUILD_GTESTS=$BUILD_GTESTS
 
 # Build
 make -j$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 4)

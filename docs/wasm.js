@@ -1,12 +1,37 @@
-// LicenseCore++ Demo - Hybrid JavaScript/WASM Implementation
+// LicenseCore++ Demo - Secure Hybrid JavaScript/WASM Implementation
+// 🚨 DEMO ONLY: Uses public demo keys, not suitable for production
+
+// Load demo configuration
+if (typeof window !== 'undefined' && !window.DEMO_CONFIG) {
+    // Inline demo config if external file not loaded
+    window.DEMO_CONFIG = {
+        DEMO_KEYS: {
+            demo: "demo-github-pages-" + btoa("licensecore-demo-2024").substring(0, 16),
+            fallback: "demo-fallback-" + btoa("javascript-only-demo").substring(0, 16)
+        },
+        LIMITS: { maxLicensesPerHour: 10, maxFeaturesPerLicense: 3, maxExpiryDays: 7 },
+        SECURITY_WARNINGS: {
+            demoOnly: "⚠️ Demo keys only - not for production use!",
+            publicKeys: "🔓 These keys are public and visible to everyone"
+        }
+    };
+}
+
 class LicenseCoreDemo {
     constructor() {
-        this.secretKey = "demo-secret-key-2024";
+        // 🔒 SECURITY: Use demo-only keys
+        this.secretKey = window.DEMO_CONFIG?.DEMO_KEYS?.demo || "demo-public-key-github-pages";
+        this.isDemoMode = true;
         this.useWasm = true;
         this.wasmModule = null;
         this.wasmManager = null;
         this.currentHwid = null;
         this.currentLicense = null;
+        this.licenseCount = 0; // Rate limiting
+        this.sessionStart = Date.now();
+        
+        // Show security warning
+        this.showSecurityWarning();
 
         // Try to load WASM module
         this.initializeWasm();
@@ -15,6 +40,70 @@ class LicenseCoreDemo {
         if (!this.useWasm) {
             this.currentHwid = this.generateMockHwid();
         }
+    }
+    
+    // 🚨 Security warning for demo users
+    showSecurityWarning() {
+        if (this.isDemoMode) {
+            console.warn("🚨 DEMO MODE ACTIVE");
+            console.warn("⚠️  This demo uses PUBLIC keys visible to everyone!");
+            console.warn("🚫 Never use demo keys in production applications!");
+            console.warn("📚 See documentation for production setup guide");
+            
+            // Add visual warning to page
+            this.addVisualWarning();
+        }
+    }
+    
+    // Add visual security warning to page
+    addVisualWarning() {
+        const warning = document.createElement('div');
+        warning.className = 'demo-security-warning';
+        warning.innerHTML = `
+            <div style="
+                position: fixed; top: 0; left: 0; right: 0; 
+                background: linear-gradient(45deg, #ff6b6b, #ffa500);
+                color: white; padding: 8px; text-align: center;
+                font-weight: bold; z-index: 10000;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            ">
+                🚨 DEMO MODE: Using public demo keys • Not for production • 
+                <a href="#production-guide" style="color: white; text-decoration: underline;">
+                    Production Setup Guide
+                </a>
+            </div>
+        `;
+        document.body.appendChild(warning);
+        
+        // Add margin to body to account for warning banner and navbar
+        document.body.style.marginTop = '120px'; // 40px warning + 80px navbar
+    }
+    
+    // Rate limiting for demo
+    checkRateLimit() {
+        const now = Date.now();
+        const hoursSinceStart = (now - this.sessionStart) / (1000 * 60 * 60);
+        
+        if (hoursSinceStart >= 1) {
+            // Reset counter every hour
+            this.licenseCount = 0;
+            this.sessionStart = now;
+        }
+        
+        const maxLicenses = window.DEMO_CONFIG?.LIMITS?.maxLicensesPerHour || 10;
+        if (this.licenseCount >= maxLicenses) {
+            throw new Error(`🚨 Demo limit: Maximum ${maxLicenses} licenses per hour. Please wait or see production guide.`);
+        }
+    }
+    
+    // Apply demo watermark to licenses
+    applyDemoWatermark(licenseData) {
+        if (this.isDemoMode) {
+            licenseData.demo_mode = true;
+            licenseData.watermark = window.DEMO_CONFIG?.LIMITS?.watermark || "🔬 DEMO-ONLY";
+            licenseData.warning = "This is a demo license with public keys - not for production use";
+        }
+        return licenseData;
     }
 
     async initializeWasm() {
@@ -218,12 +307,31 @@ class LicenseCoreDemo {
     }
 
     async generateLicenseJS(userId, features, expiryDays) {
+        // Check demo rate limits
+        this.checkRateLimit();
+        
+        // Limit features in demo mode
+        if (this.isDemoMode) {
+            const maxFeatures = window.DEMO_CONFIG?.LIMITS?.maxFeaturesPerLicense || 3;
+            if (features.length > maxFeatures) {
+                features = features.slice(0, maxFeatures);
+                showStatus('warning', `🚨 Demo limit: Maximum ${maxFeatures} features allowed`);
+            }
+            
+            // Limit expiry days
+            const maxExpiry = window.DEMO_CONFIG?.LIMITS?.maxExpiryDays || 7;
+            if (expiryDays > maxExpiry) {
+                expiryDays = maxExpiry;
+                showStatus('warning', `🚨 Demo limit: Maximum ${maxExpiry} days expiry`);
+            }
+        }
+        
         const now = new Date();
         const expiry = expiryDays === -1 ?
             new Date('2099-12-31T23:59:59Z') :
             new Date(now.getTime() + expiryDays * 24 * 60 * 60 * 1000);
 
-        const licenseData = {
+        let licenseData = {
             user_id: userId,
             license_id: `lic-${Date.now()}`,
             expiry: this.formatDate(expiry),
@@ -232,11 +340,19 @@ class LicenseCoreDemo {
             features: features,
             version: 1
         };
+        
+        // Apply demo watermark
+        licenseData = this.applyDemoWatermark(licenseData);
 
         const dataToSign = JSON.stringify(licenseData, null, 2);
         const signature = await this.hmacSha256(dataToSign, this.secretKey);
 
         licenseData.hmac_signature = signature;
+        
+        // Increment counter for rate limiting
+        if (this.isDemoMode) {
+            this.licenseCount++;
+        }
 
         this.currentLicense = licenseData;
         return JSON.stringify(licenseData, null, 2);
@@ -535,6 +651,80 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Purchase button handlers - ADD HERE
+    setTimeout(() => {
+        const pricingButtons = document.querySelectorAll('.btn-pricing');
+        console.log('Found pricing buttons:', pricingButtons.length); // Debug log
+        console.log('Buttons:', pricingButtons); // Покажем сами кнопки
+        
+        // Простой тест
+        if (pricingButtons.length === 0) {
+            console.error('Кнопки не найдены!');
+            return;
+        }
+        
+        pricingButtons.forEach((button, index) => {
+            console.log(`Кнопка ${index}:`, button);
+            
+            // Простой тест клика
+            button.onclick = function() {
+                console.log('Клик по кнопке', index);
+                openPurchaseModal('Test License', '$999');
+            };
+            
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Клик через addEventListener', index);
+                
+                let licenseType, price;
+                
+                switch(index) {
+                    case 0:
+                        licenseType = 'Developer License';
+                        price = '$299';
+                        break;
+                    case 1:
+                        licenseType = 'Professional License';
+                        price = '$899';
+                        break;
+                    case 2:
+                        licenseType = 'Enterprise License';
+                        price = '$1,999/year';
+                        break;
+                    default:
+                        licenseType = 'License';
+                        price = 'Contact us';
+                }
+                
+                console.log('Opening modal for:', licenseType, price);
+                openPurchaseModal(licenseType, price);
+            });
+        });
+        
+        // Close modal when clicking X
+        const closeButton = document.querySelector('.close');
+        if (closeButton) {
+            closeButton.addEventListener('click', closeModal);
+        }
+        
+        // Close modal when clicking outside
+        const modal = document.getElementById('purchaseModal');
+        if (modal) {
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+        }
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    }, 500); // Increased delay to ensure everything is loaded
+
     // Add demo scenario buttons
     const demoScenarios = document.createElement('div');
     demoScenarios.className = 'demo-scenarios';
@@ -607,3 +797,158 @@ scenarioStyles.textContent = `
     }
 `;
 document.head.appendChild(scenarioStyles);
+
+// Purchase Modal Functions
+function openPurchaseModal(licenseType, price) {
+    const modal = document.getElementById('purchaseModal');
+    const modalLicenseType = document.getElementById('modalLicenseType');
+    const modalPrice = document.getElementById('modalPrice');
+    
+    modalLicenseType.textContent = licenseType;
+    modalPrice.textContent = price;
+    
+    modal.classList.add('show'); // Используем класс
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    const modal = document.getElementById('purchaseModal');
+    modal.classList.remove('show'); // Убираем класс
+    document.body.style.overflow = 'auto';
+}
+
+function sendEmail() {
+    const licenseType = document.getElementById('modalLicenseType').textContent;
+    const price = document.getElementById('modalPrice').textContent;
+    
+    const subject = encodeURIComponent(`LicenseCore++ License Order - ${licenseType}`);
+    const body = encodeURIComponent(
+        `Hello!\n\n` +
+        `I would like to purchase a LicenseCore++ license:\n` +
+        `Type: ${licenseType}\n` +
+        `Price: ${price}\n\n` +
+        `Please send me payment details for cryptocurrency payment (USDT/TON/Bitcoin).\n\n` +
+        `Best regards`
+    );
+    
+    window.location.href = `mailto:sales@licensecore.tech?subject=${subject}&body=${body}`;
+    closeModal();
+}
+
+// Cookie Consent Functions
+function showCookieBanner() {
+    const consent = localStorage.getItem('cookieConsent');
+    if (!consent) {
+        const banner = document.getElementById('cookieConsent');
+        banner.classList.add('show');
+    }
+}
+
+function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    localStorage.setItem('analytics-cookies', 'true');
+    localStorage.setItem('marketing-cookies', 'true');
+    hideCookieBanner();
+    
+    // Update Google Consent Mode
+    if (typeof gtag !== 'undefined') {
+        gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+        });
+    }
+    
+    console.log('Cookies accepted - enabling all tracking');
+}
+
+function rejectCookies() {
+    localStorage.setItem('cookieConsent', 'rejected');
+    localStorage.setItem('analytics-cookies', 'false');
+    localStorage.setItem('marketing-cookies', 'false');
+    hideCookieBanner();
+    
+    // Keep Google Consent Mode as denied (default)
+    console.log('Cookies rejected - tracking remains disabled');
+}
+
+function showCookieSettings() {
+    const modal = document.getElementById('cookieSettingsModal');
+    if (modal) {
+        modal.classList.add('show');
+    } else {
+        // Fallback if modal doesn't exist
+        console.log('Cookie settings modal not found');
+    }
+}
+
+function closeCookieSettings() {
+    const modal = document.getElementById('cookieSettingsModal');
+    if (modal) {
+        modal.classList.remove('show');
+    }
+}
+
+function saveCookieSettings() {
+    const analyticsEnabled = document.getElementById('analytics-cookies')?.checked || false;
+    const marketingEnabled = document.getElementById('marketing-cookies')?.checked || false;
+    
+    localStorage.setItem('cookieConsent', 'custom');
+    localStorage.setItem('analytics-cookies', analyticsEnabled.toString());
+    localStorage.setItem('marketing-cookies', marketingEnabled.toString());
+    
+    // Update Google Consent Mode based on user choices
+    if (typeof gtag !== 'undefined') {
+        gtag('consent', 'update', {
+            'ad_storage': marketingEnabled ? 'granted' : 'denied',
+            'ad_user_data': marketingEnabled ? 'granted' : 'denied', 
+            'ad_personalization': marketingEnabled ? 'granted' : 'denied',
+            'analytics_storage': analyticsEnabled ? 'granted' : 'denied'
+        });
+    }
+    
+    hideCookieBanner();
+    closeCookieSettings();
+    
+    console.log('Cookie settings saved:', { analytics: analyticsEnabled, marketing: marketingEnabled });
+}
+
+function hideCookieBanner() {
+    const banner = document.getElementById('cookieConsent');
+    banner.classList.remove('show');
+}
+
+// Initialize cookie banner on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if user already made a choice
+    const consent = localStorage.getItem('cookieConsent');
+    
+    if (consent === 'accepted') {
+        // Update consent mode immediately
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted', 
+                'analytics_storage': 'granted'
+            });
+        }
+    } else if (consent === 'custom') {
+        // Apply custom settings
+        const analyticsEnabled = localStorage.getItem('analytics-cookies') === 'true';
+        const marketingEnabled = localStorage.getItem('marketing-cookies') === 'true';
+        
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', {
+                'ad_storage': marketingEnabled ? 'granted' : 'denied',
+                'ad_user_data': marketingEnabled ? 'granted' : 'denied',
+                'ad_personalization': marketingEnabled ? 'granted' : 'denied',
+                'analytics_storage': analyticsEnabled ? 'granted' : 'denied'
+            });
+        }
+    } else {
+        // Show cookie banner after a delay if no choice made
+        setTimeout(showCookieBanner, 1000);
+    }
+});

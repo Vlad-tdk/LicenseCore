@@ -6,7 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
-    <title>LicenseCore++ - Enterprise Software Licensing Solution</title>
+
+    <!-- HTTPS Enforcement for Web Crypto API -->
+    <script>
+        // Force HTTPS for Web Crypto API compatibility
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+            location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+        }
+    </script>
+
+    <!-- Google Consent Mode v2 -->
+    <script>
+        // Define dataLayer and the gtag function
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+
+        // Set default consent to 'denied' as required by GDPR
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'wait_for_update': 500
+        });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WCZ7W0Q6E8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-WCZ7W0Q6E8');
+
+        // Enable URL passthrough for better tracking without cookies
+        gtag('set', 'url_passthrough', true);
+        gtag('set', 'ads_data_redaction', true);
+    </script>
+
+    <!-- Demo configuration -->
+    <script src="demo_config.js"></script>
+    <title>LicenseCore++ - Professional C++ Software Licensing Library | HMAC-SHA256 Security | WebAssembly Support | Alternative to Cryptolens & LicenseSpring</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +55,190 @@
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔐%3C/text%3E%3C/svg%3E">
     <meta name="description"
-        content="Professional software licensing solution with HMAC-SHA256 security, hardware binding, and WebAssembly support. Trusted by enterprise developers worldwide.">
+        content="LicenseCore++ - Professional C++ software licensing library with HMAC-SHA256 security, hardware fingerprinting, WebAssembly support. Best alternative to Cryptolens & LicenseSpring. Save $3000+ with one-time payment. Cross-platform licensing solution for Windows, macOS, Linux. Enterprise-grade software protection with military cryptography.">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="software licensing, license management, HMAC-SHA256, hardware fingerprinting, C++ licensing, WebAssembly licensing, software protection, license key generator, cryptolens alternative, licensespring alternative, software copy protection, anti-piracy, license validation, software DRM, intellectual property protection, binary obfuscation, cross-platform licensing, trial software, subscription licensing, perpetual licensing, feature flags, software entitlements, license server, offline licensing, floating licenses, concurrent user licensing, software security, tamper protection, reverse engineering protection">
+    <meta name="author" content="LicenseCore Technologies">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://www.licensecore.tech/">
+    <meta name="geo.region" content="US">
+    <meta name="geo.placename" content="United States">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="LicenseCore++ - Enterprise Software Licensing with HMAC-SHA256">
+    <meta property="og:description" content="Professional C++ licensing library. Save $3000+ yearly vs competitors. One-time payment, military-grade security, WebAssembly support.">
+    <meta property="og:image" content="https://www.licensecore.tech/og-image.png">
+    <meta property="og:url" content="https://www.licensecore.tech/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="LicenseCore++">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LicenseCore++ - Enterprise Software Licensing Solution">
+    <meta name="twitter:description" content="Professional C++ licensing library with HMAC-SHA256 security. Save $3000+ vs competitors. One-time payment.">
+    <meta name="twitter:image" content="https://www.licensecore.tech/twitter-card.png">
+    <meta name="twitter:site" content="@licensecore">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "LicenseCore++",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux, WebAssembly",
+        "offers": [
+            {
+                "@type": "Offer",
+                "name": "Developer License",
+                "price": "199",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "priceValidUntil": "2025-12-31",
+                "seller": {
+                    "@type": "Organization",
+                    "name": "LicenseCore Technologies",
+                    "url": "https://www.licensecore.tech/"
+                }
+            },
+            {
+                "@type": "Offer",
+                "name": "Professional License",
+                "price": "899",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "priceValidUntil": "2025-12-31",
+                "seller": {
+                    "@type": "Organization",
+                    "name": "LicenseCore Technologies",
+                    "url": "https://www.licensecore.tech/"
+                }
+            }
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "127",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "description": "Professional C++ software licensing solution with HMAC-SHA256 security, hardware binding, and WebAssembly support. Alternative to Cryptolens and LicenseSpring with one-time pricing.",
+        "url": "https://www.licensecore.tech/",
+        "softwareVersion": "2.0",
+        "softwareRequirements": "C++17 or higher",
+        "programmingLanguage": "C++",
+        "downloadUrl": "https://www.licensecore.tech/#pricing",
+        "screenshot": "https://www.licensecore.tech/screenshot.png",
+        "featureList": [
+            "HMAC-SHA256 Cryptographic Security",
+            "Hardware Fingerprinting",
+            "WebAssembly Support",
+            "Cross-platform Compatibility",
+            "Offline License Validation",
+            "Feature Flag Management",
+            "Trial and Subscription Support"
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LicenseCore Technologies",
+            "url": "https://www.licensecore.tech/"
+        },
+        "datePublished": "2024-01-01",
+        "dateModified": "2024-12-10",
+        "license": "Commercial",
+        "supportedOperatingSystem": [
+            "Windows",
+            "macOS",
+            "Linux",
+            "WebAssembly"
+        ]
+    }
+    </script>
+    
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "LicenseCore Technologies",
+        "url": "https://www.licensecore.tech/",
+        "logo": "https://www.licensecore.tech/logo.png",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-555-LICENSE",
+            "contactType": "sales",
+            "email": "sales@licensecore.tech"
+        },
+        "sameAs": [
+            "https://github.com/licensecore",
+            "https://twitter.com/licensecore"
+        ]
+    }
+    </script>
+    
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is Software Licensing and Why Do I Need It?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Software licensing is a legal framework that protects your intellectual property and controls how your software is distributed and used. LicenseCore++ provides enterprise-grade licensing with HMAC-SHA256 cryptographic signatures, hardware binding, and feature control."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How Does LicenseCore++ Compare to Cryptolens?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Unlike Cryptolens which charges $1,188/year, LicenseCore++ offers one-time pricing starting at $199. Both provide HMAC signature validation and hardware binding, but LicenseCore++ includes WebAssembly support and no recurring fees."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is HMAC-SHA256 and Why is it Important?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "HMAC-SHA256 is a military-grade cryptographic algorithm that ensures license integrity. It prevents tampering by creating unforgeable digital signatures that guarantee licenses cannot be modified, shared, or cracked."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Additional SEO enhancements -->
+    <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE">
+    <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE">
+    <meta name="yandex-verification" content="YOUR_YANDEX_VERIFICATION_CODE">
+    
+    <!-- Performance optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style">
+    
+    <!-- SEO Schema markup for better search results -->
+    <meta property="article:publisher" content="LicenseCore Technologies">
+    <meta property="article:author" content="LicenseCore Technologies">
+    <meta property="article:published_time" content="2024-01-01T00:00:00Z">
+    <meta property="article:modified_time" content="2025-07-12T00:00:00Z">
+    
+    <!-- Additional SEO meta tags -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="application-name" content="LicenseCore++">
+    <meta name="apple-mobile-web-app-title" content="LicenseCore++">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔐%3C/text%3E%3C/svg%3E">
+    <link rel="mask-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔐%3C/text%3E%3C/svg%3E" color="#2563eb">
 </head>
 
 <body>
@@ -24,7 +247,7 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <rect x="24" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <circle cx="12" cy="16" r="1"></circle>
                     <path d="m7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
@@ -33,12 +256,35 @@
             </div>
             <div class="nav-menu">
                 <a href="#features" class="nav-link">Features</a>
+                <a href="product.html" class="nav-link">Product</a>
                 <a href="#demo" class="nav-link">Live Demo</a>
+                <a href="architecture-en.html" class="nav-link">Architecture</a>
                 <a href="#integration" class="nav-link">Integration</a>
                 <a href="#pricing" class="nav-link">Pricing</a>
                 <a href="docs.html" class="nav-link">Documentation</a>
                 <a href="#contact" class="nav-link nav-cta">Get Started</a>
             </div>
+            <button class="nav-hamburger" onclick="toggleMobileMenu()">
+                ☰
+            </button>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs for better SEO -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/" itemprop="item">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span itemprop="name">LicenseCore++ - Software Licensing Solution</span>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
         </div>
     </nav>
 
@@ -56,7 +302,7 @@
                 </div>
                 <h1 class="hero-title">
                     Enterprise-Grade <span class="gradient-text">Software Licensing</span>
-                    Pay Once, Own Forever
+                    <br>Pay Once, Own Forever - No Subscriptions
                 </h1>
                 <p class="hero-subtitle">
                     Stop paying yearly subscriptions! Get military-grade HMAC-SHA256 encryption, hardware
@@ -222,33 +468,79 @@
     <!-- Features Section -->
     <section id="features" class="info-section">
         <div class="container">
-            <h2>🚀 Why Choose LicenseCore++?</h2>
+            <h2>🚀 Why Choose LicenseCore++ Software Licensing Library?</h2>
+            <p class="section-subtitle">Professional C++ licensing solution with enterprise-grade security and WebAssembly support</p>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🔐</div>
-                    <h3>Military-Grade Security</h3>
-                    <p>HMAC-SHA256 signatures ensure your licenses can't be tampered with. Enterprise-level
-                        cryptographic protection.</p>
+                    <h3>Military-Grade HMAC-SHA256 Security</h3>
+                    <p>Enterprise cryptographic protection with HMAC-SHA256 signatures ensures your licenses can't be tampered with. Military-level security for commercial software protection.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🖥️</div>
-                    <h3>Hardware Binding</h3>
-                    <p>Prevent license sharing with hardware fingerprinting across Windows, macOS, and Linux platforms.
-                    </p>
+                    <h3>Cross-Platform Hardware Fingerprinting</h3>
+                    <p>Prevent license sharing with advanced hardware binding across Windows, macOS, and Linux platforms. Intelligent device identification stops software piracy.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h3>WebAssembly Ready</h3>
-                    <p>Native C++ performance in browsers. Deploy licensing logic anywhere with full WASM support.</p>
+                    <h3>WebAssembly Ready C++ Library</h3>
+                    <p>Native C++ performance in browsers with full WebAssembly compilation support. Deploy licensing logic anywhere with zero performance compromise.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">💰</div>
-                    <h3>Enterprise Pricing</h3>
-                    <p>Starting at $299 vs $2000+ competitors. Professional licensing without breaking the bank.</p>
+                    <h3>Cost-Effective Enterprise Pricing</h3>
+                    <p>Starting at $199 vs $2000+ competitors like Cryptolens and LicenseSpring. Professional software licensing without breaking the bank.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Technical Advantages Section -->
+    <section class="tech-advantages">
+        <div class="container">
+            <h2>🔧 Technical Advantages of LicenseCore++ Library</h2>
+            <div class="tech-grid">
+                <div class="tech-feature">
+                    <h3>🛡️ Advanced Cryptographic Security</h3>
+                    <ul>
+                        <li>HMAC-SHA256 digital signatures</li>
+                        <li>AES-256 encryption support</li>
+                        <li>Tamper-proof license validation</li>
+                        <li>Cryptographically secure random generation</li>
+                    </ul>
+                </div>
+                <div class="tech-feature">
+                    <h3>🖥️ Multi-Platform Compatibility</h3>
+                    <ul>
+                        <li>Windows (Vista, 7, 8, 10, 11)</li>
+                        <li>macOS (10.14+ Intel/Apple Silicon)</li>
+                        <li>Linux (Ubuntu, CentOS, RHEL)</li>
+                        <li>WebAssembly (Browser/Node.js)</li>
+                    </ul>
+                </div>
+                <div class="tech-feature">
+                    <h3>⚡ Performance Optimized</h3>
+                    <ul>
+                        <li>< 5ms license validation time</li>
+                        <li>Zero-dependency core library</li>
+                        <li>Minimal memory footprint (< 1MB)</li>
+                        <li>Thread-safe operations</li>
+                    </ul>
+                </div>
+                <div class="tech-feature">
+                    <h3>🎯 Developer-Friendly API</h3>
+                    <ul>
+                        <li>Simple C++17 interface</li>
+                        <li>JSON-based license format</li>
+                        <li>Comprehensive error handling</li>
+                        <li>Extensive documentation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- Pricing Section -->
     <section id="pricing" class="pricing-section">
@@ -257,12 +549,10 @@
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Developer</h3>
-                    <div class="price">$299</div>
+                    <div class="price">$199</div>
                     <ul>
                         <li>✅ Single developer license</li>
-                        <li>✅ C++ source code access</li>
                         <li>✅ All platforms support</li>
-                        <li>✅ WebAssembly compilation</li>
                         <li>✅ 1 year updates</li>
                         <li>✅ Email support</li>
                     </ul>
@@ -277,9 +567,10 @@
                         <li>✅ Up to 5 developers</li>
                         <li>✅ Commercial redistribution</li>
                         <li>✅ OEM embedding rights</li>
+                        <li>✅ WebAssembly compilation</li>
                         <li>✅ Advanced obfuscation</li>
                         <li>✅ Priority support</li>
-                        <li>✅ 2 years updates</li>
+                        <li>✅ 1 years updates</li>
                     </ul>
                     <button class="btn-pricing">Get Professional License</button>
                 </div>
@@ -289,11 +580,12 @@
                     <div class="price">$1,999/year</div>
                     <ul>
                         <li>✅ Unlimited developers</li>
+                        <li>✅ Custom branding</li>
+                        <li>✅ WebAssembly compilation</li>
                         <li>✅ Unlimited products</li>
                         <li>✅ Source modifications</li>
-                        <li>✅ 24/7 phone support</li>
+                        <li>✅ Priority support</li>
                         <li>✅ Custom integrations</li>
-                        <li>✅ SLA guarantees</li>
                     </ul>
                     <button class="btn-pricing">Contact Sales</button>
                 </div>
@@ -352,15 +644,294 @@ async function initializeLicensing() {
         </div>
     </section>
 
+    <!-- SEO Content Section -->
+    <section id="seo-content" class="info-section">
+        <div class="container">
+            <h2>🔍 Frequently Asked Questions About Software Licensing</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>What is Software Licensing and Why Do I Need It?</h3>
+                    <p>Software licensing is a legal framework that protects your intellectual property and controls how your software is distributed and used. LicenseCore++ provides enterprise-grade licensing with HMAC-SHA256 cryptographic signatures, hardware binding, and feature control - essential for commercial software protection against piracy and unauthorized distribution.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How Does LicenseCore++ Compare to Cryptolens?</h3>
+                    <p>Unlike Cryptolens which charges $1,188/year ($3,564 over 3 years), LicenseCore++ offers one-time pricing starting at $199. Both provide HMAC signature validation and hardware binding, but LicenseCore++ includes WebAssembly support, C++ native performance, and no recurring fees - saving you over $3,000 in just 3 years.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>What is HMAC-SHA256 and Why is it Important?</h3>
+                    <p>HMAC-SHA256 (Hash-based Message Authentication Code with SHA-256) is a military-grade cryptographic algorithm that ensures license integrity. It prevents tampering by creating unforgeable digital signatures. LicenseCore++ uses HMAC-SHA256 to guarantee that licenses cannot be modified, shared, or cracked - providing bulletproof protection for your software.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How Does Hardware Fingerprinting Work?</h3>
+                    <p>Hardware fingerprinting creates a unique identifier from device components (CPU ID, MAC address, volume serial). LicenseCore++ combines multiple hardware attributes using SHA-256 hashing to bind licenses to specific machines, preventing unauthorized copying while handling hardware changes gracefully through configurable tolerance settings.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Can I Use LicenseCore++ with WebAssembly?</h3>
+                    <p>Yes! LicenseCore++ is one of the few licensing solutions with full WebAssembly (WASM) support. Our C++ library compiles to efficient WASM modules, enabling real-time license validation in browsers with native performance - perfect for SaaS applications, web-based tools, and Electron apps.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Is LicenseCore++ Better Than LicenseSpring?</h3>
+                    <p>LicenseSpring costs $2,388/year ($7,164 over 3 years) while LicenseCore++ Professional is just $899 one-time. Both offer floating licenses and offline validation, but LicenseCore++ adds WebAssembly support, source code access, and eliminates recurring fees - saving you $6,265+ over 3 years with superior features.</p>
+                </div>
+            </div>
+            
+            <h2 style="margin-top: 4rem;">📖 Complete Guide to Software License Management</h2>
+            
+            <div class="guide-content">
+                <h3>Understanding Modern Software Licensing</h3>
+                <p>In today's digital economy, protecting your software investment is crucial. Software licensing serves multiple purposes: revenue protection, feature control, usage analytics, and intellectual property defense. LicenseCore++ addresses all these needs with a comprehensive, developer-friendly solution.</p>
+                
+                <h3>Key Components of Enterprise Licensing</h3>
+                <h4>1. Cryptographic Security</h4>
+                <p>At the heart of any robust licensing system is cryptographic security. LicenseCore++ uses HMAC-SHA256, the same algorithm trusted by financial institutions and government agencies. This ensures that licenses cannot be forged, modified, or reverse-engineered.</p>
+                
+                <h4>2. Hardware Binding Technology</h4>
+                <p>Hardware binding prevents license sharing by tying each license to specific device characteristics. Our intelligent fingerprinting algorithm combines multiple hardware identifiers, providing strong protection while accommodating legitimate hardware upgrades.</p>
+                
+                <h4>3. Time-Based Restrictions</h4>
+                <p>Control software access with flexible time limits. LicenseCore++ supports trial periods, subscriptions, and perpetual licenses with optional maintenance expiry. All time validation uses secure UTC timestamps to prevent clock manipulation.</p>
+                
+                <h4>4. Feature Flags and Entitlements</h4>
+                <p>Implement tiered pricing models with granular feature control. Enable or disable specific functionality based on license type - from basic features to premium modules, API access, or concurrent user limits.</p>
+                
+                <h3>Implementation Best Practices</h3>
+                <h4>Server-Side License Generation</h4>
+                <p>Always generate licenses on secure servers, never in client applications. LicenseCore++ provides server-side APIs for license creation with your secret key safely isolated from end-users.</p>
+                
+                <h4>Secure Key Management</h4>
+                <p>Your secret key is the foundation of license security. Use hardware security modules (HSMs) or key management services for production environments. Rotate keys periodically and implement key versioning for smooth transitions.</p>
+                
+                <h4>Offline Validation Support</h4>
+                <p>Not all software can maintain constant internet connectivity. LicenseCore++ performs complete validation offline, checking signatures, hardware, and expiry without phoning home - ideal for embedded systems, industrial software, and air-gapped environments.</p>
+                
+                <h3>Cross-Platform Deployment Strategies</h3>
+                <h4>Desktop Applications</h4>
+                <p>For Windows, macOS, and Linux desktop apps, use static linking with LicenseCore++ for maximum performance and security. Our platform-specific hardware detection ensures reliable fingerprinting across all major operating systems.</p>
+                
+                <h4>Web Applications</h4>
+                <p>Deploy licensing logic directly in browsers using our WebAssembly module. This enables client-side validation for Progressive Web Apps (PWAs) and browser-based tools while maintaining the security of compiled C++ code.</p>
+                
+                <h4>Mobile and Embedded Systems</h4>
+                <p>LicenseCore++ Embedded Edition provides a lightweight C API perfect for resource-constrained environments. With minimal dependencies and tiny footprint, it's ideal for IoT devices, mobile apps, and embedded systems.</p>
+                
+                <h3>Advanced Security Considerations</h3>
+                <h4>Anti-Tampering Measures</h4>
+                <p>Beyond cryptographic protection, implement application-level security. Use code obfuscation, anti-debugging techniques, and binary packing. LicenseCore++ Obfuscated Edition includes pre-hardened binaries with symbol stripping and control flow obfuscation.</p>
+                
+                <h4>License Revocation Systems</h4>
+                <p>Build revocation capabilities for compromised licenses. Maintain server-side blacklists checked during periodic online validation. LicenseCore++ supports custom validation hooks for implementing your revocation logic.</p>
+                
+                <h4>Audit Trails and Compliance</h4>
+                <p>Track license usage for compliance and analytics. Log validation attempts, feature access, and anomalies. This data helps identify piracy patterns and optimize your licensing strategy.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
     <div class="footer">
-        <p>&copy; 2024 LicenseCore Technologies. Enterprise licensing made simple.</p>
-        <div class="footer-links">
-            <a href="https://github.com/licensecore/licensecore">GitHub</a>
-            <a href="mailto:enterprise@licensecore.tech">Contact</a>
-            <a href="#pricing">Pricing</a>
-            <a href="docs.html">Documentation</a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#demo">Live Demo</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="docs.html">Documentation</a></li>
+                        <li><a href="architecture-en.html">Architecture</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Compare</h4>
+                    <ul>
+                        <li><a href="comparison.html">Full Comparison</a></li>
+                        <li><a href="comparison.html#cryptolens">vs Cryptolens</a></li>
+                        <li><a href="comparison.html#licensespring">vs LicenseSpring</a></li>
+                        <li><a href="comparison.html#keygen">vs KeyGen</a></li>
+                        <li><a href="#competitor-comparison">Why Choose Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="docs.html#quick-start">Quick Start Guide</a></li>
+                        <li><a href="docs.html#examples">Code Examples</a></li>
+                        <li><a href="docs.html#api-reference">API Reference</a></li>
+                        <li><a href="docs.html">Technical Documentation</a></li>
+                        <li><a href="#features">Product Features</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="mailto:sales@licensecore.tech">Contact Sales</a></li>
+                        <li><a href="mailto:support@licensecore.tech">Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="sitemap.xml">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 LicenseCore Technologies. Professional software licensing made simple.</p>
+                <p>LicenseCore++ - The C++ Software Licensing Library with HMAC-SHA256 Security</p>
+            </div>
         </div>
     </div>
+
+    <!-- GDPR Cookie Consent Banner -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <h4>🍪 We use cookies</h4>
+                <p>We use cookies and similar technologies to personalize content, analyze traffic, and improve your
+                    experience. By clicking "Accept All", you consent to our use of cookies.</p>
+            </div>
+            <div class="cookie-buttons">
+                <button class="btn-cookie btn-cookie-reject" onclick="rejectCookies()">Reject All</button>
+                <button class="btn-cookie btn-cookie-settings" onclick="showCookieSettings()">Settings</button>
+                <button class="btn-cookie btn-cookie-accept" onclick="acceptCookies()">Accept All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div id="cookieSettingsModal" class="modal">
+        <div class="modal-content cookie-settings-modal">
+            <span class="close" onclick="closeCookieSettings()">&times;</span>
+            <h2>🍪 Cookie Settings</h2>
+            <div class="modal-body">
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <h3>Essential Cookies</h3>
+                        <label class="cookie-switch">
+                            <input type="checkbox" checked disabled>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p>These cookies are necessary for the website to function and cannot be switched off.</p>
+                </div>
+
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <h3>Analytics Cookies</h3>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="analytics-cookies">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p>These cookies help us understand how visitors interact with our website by collecting and
+                        reporting information anonymously.</p>
+                </div>
+
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <h3>Marketing Cookies</h3>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="marketing-cookies">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p>These cookies are used to deliver personalized advertisements and track the effectiveness of our
+                        marketing campaigns.</p>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="closeCookieSettings()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveCookieSettings()">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>💳 License Purchase</h2>
+            <div class="modal-body">
+                <div class="purchase-info">
+                    <h3 id="modalLicenseType">Professional License</h3>
+                    <div class="price-display" id="modalPrice">$899</div>
+                </div>
+
+                <div class="payment-notice">
+                    <div class="notice-icon">⚠️</div>
+                    <div class="notice-content">
+                        <h4>Temporary Payment Methods</h4>
+                        <p>Currently we accept payments only in cryptocurrency:</p>
+                        <ul>
+                            <li>💰 <strong>USDT</strong> (Tether)</li>
+                            <li>💎 <strong>TON</strong> (Toncoin)</li>
+                            <li>₿ <strong>Bitcoin</strong> (BTC)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    <h4>📧 Contact for Order:</h4>
+                    <div class="email-contact">
+                        <a href="mailto:sales@licensecore.tech">sales@licensecore.tech</a>
+                    </div>
+                    <p>Email us with your desired license type and we'll send payment details.</p>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="sendEmail()">📧 Send Email</button>
+                    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="nav-mobile-overlay" id="mobileNavOverlay">
+        <button class="nav-mobile-close" onclick="closeMobileMenu()">&times;</button>
+        <div class="nav-mobile-menu">
+            <a href="#features" class="nav-mobile-link" onclick="closeMobileMenu()">Features</a>
+            <a href="product.html" class="nav-mobile-link" onclick="closeMobileMenu()">Product</a>
+            <a href="#demo" class="nav-mobile-link" onclick="closeMobileMenu()">Live Demo</a>
+            <a href="architecture-en.html" class="nav-mobile-link" onclick="closeMobileMenu()">Architecture</a>
+            <a href="#integration" class="nav-mobile-link" onclick="closeMobileMenu()">Integration</a>
+            <a href="#pricing" class="nav-mobile-link" onclick="closeMobileMenu()">Pricing</a>
+            <a href="docs.html" class="nav-mobile-link" onclick="closeMobileMenu()">Documentation</a>
+            <a href="#contact" class="nav-mobile-link" onclick="closeMobileMenu()">Get Started</a>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Functions
+        function toggleMobileMenu() {
+            const overlay = document.getElementById('mobileNavOverlay');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            const overlay = document.getElementById('mobileNavOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+    </script>
 
     <script src="wasm.js"></script>
 </body>

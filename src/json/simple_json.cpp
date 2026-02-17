@@ -174,9 +174,18 @@ std::unordered_map<std::string, JsonValue> SimpleJson::parse(const std::string& 
 std::string SimpleJson::stringify(const std::unordered_map<std::string, JsonValue>& data) {
     std::ostringstream ss;
     ss << "{\n";
-    
+
+    // Canonical order keeps signatures stable across platforms/processes.
+    std::vector<std::string> keys;
+    keys.reserve(data.size());
+    for (const auto& [key, _] : data) {
+        keys.push_back(key);
+    }
+    std::sort(keys.begin(), keys.end());
+
     bool first = true;
-    for (const auto& [key, value] : data) {
+    for (const auto& key : keys) {
+        const auto& value = data.at(key);
         if (!first) ss << ",\n";
         first = false;
         

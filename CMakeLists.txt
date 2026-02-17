@@ -10,32 +10,16 @@ project(LicenseCore
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Options
-option(LICENSECORE_BUILD_EXAMPLES "Build examples" ON)
-option(LICENSECORE_BUILD_TESTS "Build tests" ON)
-option(LICENSECORE_BUILD_GTESTS "Build Google Tests" ON)
+option(LICENSECORE_BUILD_EXAMPLES "Build examples" OFF)
+option(LICENSECORE_BUILD_TESTS "Build tests" OFF)
+option(LICENSECORE_BUILD_GTESTS "Build Google Tests" OFF)
 option(LICENSECORE_BUILD_SHARED "Build shared library" OFF)
 
 # Find dependencies
-find_package(OpenSSL)
-if(NOT OpenSSL_FOUND)
-    # Try to find OpenSSL manually on different platforms
-    if(APPLE)
-        # Check Homebrew locations
-        if(EXISTS "/opt/homebrew/include/openssl")
-            set(OPENSSL_ROOT_DIR "/opt/homebrew")
-            set(OPENSSL_INCLUDE_DIR "/opt/homebrew/include")
-            set(OPENSSL_LIBRARIES "/opt/homebrew/lib/libssl.dylib;/opt/homebrew/lib/libcrypto.dylib")
-            set(OpenSSL_FOUND TRUE)
-        elseif(EXISTS "/usr/local/include/openssl")
-            set(OPENSSL_ROOT_DIR "/usr/local")
-            set(OPENSSL_INCLUDE_DIR "/usr/local/include")
-            set(OPENSSL_LIBRARIES "/usr/local/lib/libssl.dylib;/usr/local/lib/libcrypto.dylib")
-            set(OpenSSL_FOUND TRUE)
-        endif()
-    endif()
-endif()
+find_package(OpenSSL REQUIRED)
 
 # Create main library
 set(LICENSECORE_SOURCES
@@ -68,14 +52,9 @@ target_include_directories(licensecore
 
 target_link_libraries(licensecore
     PUBLIC
-        ${OPENSSL_LIBRARIES}
+        OpenSSL::SSL
+        OpenSSL::Crypto
 )
-
-if(OpenSSL_FOUND)
-    target_include_directories(licensecore PRIVATE ${OPENSSL_INCLUDE_DIR})
-else()
-    message(WARNING "OpenSSL not found. Install with: brew install openssl (macOS) or sudo apt install libssl-dev (Linux)")
-endif()
 
 # Platform-specific libraries
 if(WIN32)

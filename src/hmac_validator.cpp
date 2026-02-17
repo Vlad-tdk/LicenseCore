@@ -181,7 +181,7 @@ std::vector<uint8_t> HMACValidator::from_hex(const std::string& hex) const {
             
             // Validate hex characters
             for (char c : byte_string) {
-                if (!std::isxdigit(c)) {
+                if (!std::isxdigit(static_cast<unsigned char>(c))) {
                     throw CryptographicException("Invalid hex character: " + std::string(1, c));
                 }
             }

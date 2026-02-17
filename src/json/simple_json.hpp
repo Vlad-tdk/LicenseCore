@@ -103,7 +103,7 @@ public:
     
     // Skip whitespace safely
     static size_t skip_whitespace(const std::string& str, size_t pos) {
-        while (pos < str.length() && std::isspace(str[pos])) {
+        while (pos < str.length() && std::isspace(static_cast<unsigned char>(str[pos]))) {
             pos++;
         }
         return pos;

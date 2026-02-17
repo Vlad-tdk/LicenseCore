@@ -59,15 +59,15 @@ class LicenseCoreDemo {
         const licenseData = {
             user_id: userId,
             license_id: `lic-${Date.now()}`,
-            expiry: this.formatDate(expiry),
-            issued_at: this.formatDate(now),
             hardware_hash: this.currentHwid,
             features: features,
+            expiry: this.formatDate(expiry),
+            issued_at: this.formatDate(now),
             version: 1
         };
 
         // Create JSON without signature for signing
-        const dataToSign = JSON.stringify(licenseData, null, 2);
+        const dataToSign = JSON.stringify(licenseData);
         const signature = await this.hmacSha256(dataToSign, this.secretKey);
         
         licenseData.hmac_signature = signature;
@@ -80,10 +80,10 @@ class LicenseCoreDemo {
         try {
             const license = JSON.parse(licenseJson);
             
-            // Check required fields
-            const required = ['user_id', 'license_id', 'expiry', 'hardware_hash', 'features', 'hmac_signature'];
+            // Check required fields according to real API
+            const required = ['user_id', 'license_id', 'hardware_hash', 'features', 'expiry', 'issued_at', 'version', 'hmac_signature'];
             for (const field of required) {
-                if (!license[field]) {
+                if (license[field] === undefined) {
                     return { valid: false, error: `Missing required field: ${field}` };
                 }
             }
@@ -93,11 +93,11 @@ class LicenseCoreDemo {
             const dataWithoutSignature = { ...license };
             delete dataWithoutSignature.hmac_signature;
             
-            const dataToVerify = JSON.stringify(dataWithoutSignature, null, 2);
+            const dataToVerify = JSON.stringify(dataWithoutSignature);
             const computedSignature = await this.hmacSha256(dataToVerify, this.secretKey);
             
             if (signature !== computedSignature) {
-                return { valid: false, error: "Invalid license signature" };
+                return { valid: false, error: "Invalid HMAC signature" };
             }
 
             // Check expiry
@@ -107,15 +107,23 @@ class LicenseCoreDemo {
                 return { valid: false, error: "License has expired" };
             }
 
-            // Check hardware fingerprint
-            if (license.hardware_hash !== this.currentHwid) {
+            // Check hardware fingerprint (allow wildcard)
+            if (license.hardware_hash !== '*' && license.hardware_hash !== this.currentHwid) {
                 return { valid: false, error: "Hardware fingerprint mismatch" };
             }
+
+            // Store current license for has_feature calls
+            this.currentLicense = license;
 
             return { 
                 valid: true, 
                 license: license,
-                message: "License is valid and properly signed!"
+                message: "License is valid and properly signed!",
+                user_id: license.user_id,
+                license_id: license.license_id,
+                features: license.features,
+                expiry: expiry,
+                issued_at: new Date(license.issued_at)
             };
 
         } catch (error) {
@@ -126,6 +134,26 @@ class LicenseCoreDemo {
     hasFeature(feature) {
         if (!this.currentLicense) return false;
         return this.currentLicense.features.includes(feature);
+    }
+
+    getCurrentHwid() {
+        return this.currentHwid;
+    }
+
+    // Simulate load_and_validate method
+    async loadAndValidate(licenseJson) {
+        const result = await this.validateLicense(licenseJson);
+        return {
+            valid: result.valid,
+            user_id: result.user_id || '',
+            license_id: result.license_id || '',
+            hardware_hash: result.license ? result.license.hardware_hash : '',
+            features: result.features || [],
+            expiry: result.expiry || new Date(),
+            issued_at: result.issued_at || new Date(),
+            version: result.license ? result.license.version : 1,
+            error_message: result.error || ''
+        };
     }
 }
 
@@ -189,21 +217,23 @@ async function validateLicense() {
 
     try {
         showStatus('info', '🔄 Validating license...');
-        const result = await licenseCore.validateLicense(licenseText);
+        const result = await licenseCore.loadAndValidate(licenseText);
         
         const resultDiv = document.getElementById('validationResult');
         
         if (result.valid) {
             resultDiv.innerHTML = `
                 <div class="status success">
-                    ✅ ${result.message}
-                    <br><small>User: ${result.license.user_id} | Features: ${result.license.features.join(', ')}</small>
+                    ✅ License validation successful!
+                    <br><small>User: ${result.user_id} | ID: ${result.license_id}</small>
+                    <br><small>Features: ${result.features.join(', ')}</small>
+                    <br><small>Expires: ${result.expiry.toLocaleDateString()}</small>
                 </div>
             `;
         } else {
             resultDiv.innerHTML = `
                 <div class="status error">
-                    ❌ License validation failed: ${result.error}
+                    ❌ License validation failed: ${result.error_message}
                 </div>
             `;
         }
@@ -241,12 +271,12 @@ function simulateExpiredLicense() {
     if (licenseText && !licenseText.includes('Click "Generate License"')) {
         try {
             const license = JSON.parse(licenseText);
-            license.expiry = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+            license.expiry = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().replace(/\.\d{3}Z$/, 'Z');
             
             const dataWithoutSignature = { ...license };
             delete dataWithoutSignature.hmac_signature;
             
-            licenseCore.hmacSha256(JSON.stringify(dataWithoutSignature, null, 2), licenseCore.secretKey)
+            licenseCore.hmacSha256(JSON.stringify(dataWithoutSignature), licenseCore.secretKey)
                 .then(signature => {
                     license.hmac_signature = signature;
                     document.getElementById('licenseOutput').textContent = JSON.stringify(license, null, 2);
@@ -285,59 +315,67 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add demo scenario buttons
-    const demoScenarios = document.createElement('div');
-    demoScenarios.className = 'demo-scenarios';
-    demoScenarios.innerHTML = `
-        <h3>🎭 Demo Scenarios</h3>
-        <div class="scenario-buttons">
-            <button class="btn-scenario" onclick="simulateHardwareChange()">🖥️ Hardware Change</button>
-            <button class="btn-scenario" onclick="simulateExpiredLicense()">⏰ Expired License</button>
-            <button class="btn-scenario" onclick="tamperLicense()">🕵️ Tamper License</button>
-        </div>
-    `;
-    
-    const outputSection = document.querySelector('.output-section');
-    outputSection.appendChild(demoScenarios);
+    // Add demo scenario buttons if they don't exist
+    let demoScenarios = document.querySelector('.demo-scenarios');
+    if (!demoScenarios) {
+        demoScenarios = document.createElement('div');
+        demoScenarios.className = 'demo-scenarios';
+        demoScenarios.innerHTML = `
+            <h3>🎭 Demo Scenarios</h3>
+            <div class="scenario-buttons">
+                <button class="btn-scenario" onclick="simulateHardwareChange()">🖥️ Hardware Change</button>
+                <button class="btn-scenario" onclick="simulateExpiredLicense()">⏰ Expired License</button>
+                <button class="btn-scenario" onclick="tamperLicense()">🕵️ Tamper License</button>
+            </div>
+        `;
+        
+        const outputSection = document.querySelector('.output-section');
+        if (outputSection) {
+            outputSection.appendChild(demoScenarios);
+        }
+    }
 });
 
-// Add CSS for scenario buttons
-const scenarioStyles = document.createElement('style');
-scenarioStyles.textContent = `
-    .demo-scenarios {
-        margin-top: 2rem;
-        padding-top: 2rem;
-        border-top: 2px solid #e1e5e9;
-    }
-    
-    .demo-scenarios h3 {
-        margin-bottom: 1rem;
-        color: #333;
-        font-size: 1.2rem;
-    }
-    
-    .scenario-buttons {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-    }
-    
-    .btn-scenario {
-        background: #6c757d;
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        flex: 1;
-        min-width: 120px;
-    }
-    
-    .btn-scenario:hover {
-        background: #5a6268;
-        transform: translateY(-1px);
-    }
-`;
-document.head.appendChild(scenarioStyles);
+// Add CSS for scenario buttons if not exists
+if (!document.querySelector('#scenarioStyles')) {
+    const scenarioStyles = document.createElement('style');
+    scenarioStyles.id = 'scenarioStyles';
+    scenarioStyles.textContent = `
+        .demo-scenarios {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e1e5e9;
+        }
+        
+        .demo-scenarios h3 {
+            margin-bottom: 1rem;
+            color: #333;
+            font-size: 1.2rem;
+        }
+        
+        .scenario-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-scenario {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .btn-scenario:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+    `;
+    document.head.appendChild(scenarioStyles);
+}
